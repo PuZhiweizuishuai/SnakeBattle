@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://brrro5nfyff27"]
+
+[ext_resource type="Script" path="res://Scripts/body_segment.gd" id="1_j07lj"]
+[ext_resource type="Texture2D" uid="uid://coxc7p1gakam0" path="res://AssetBundle/Sprites/Snak/sb0102.png" id="1_p03sc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u2a62"]
+radius = 19.0
+
+[node name="BodySegment" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_j07lj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_p03sc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u2a62")

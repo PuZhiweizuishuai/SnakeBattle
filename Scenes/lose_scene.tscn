@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://xhkh3sia8ov5"]
+
+[ext_resource type="Script" path="res://Scripts/lose_scene.gd" id="1_bps60"]
+
+[node name="LoseScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bps60")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 1.0
+offset_right = 1042.0
+offset_bottom = 364.0
+theme_override_colors/font_color = Color(0.515101, 0.343711, 0.37903, 1)
+theme_override_font_sizes/font_size = 266
+text = "你输了"
+
+[node name="SourceLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 414.0
+offset_top = 334.0
+offset_right = 1212.0
+offset_bottom = 697.0
+theme_override_colors/font_color = Color(0.515101, 0.343711, 0.37903, 1)
+theme_override_font_sizes/font_size = 121
+text = "得分："
+
+[node name="RestartBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 529.0
+offset_right = 674.0
+offset_bottom = 601.0
+theme_override_font_sizes/font_size = 46
+text = "重开"
+
+[connection signal="button_down" from="RestartBtn" to="." method="_on_restart_btn_button_down"]

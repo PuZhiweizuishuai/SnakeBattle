@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://n41lbgr160k4"]
+
+[ext_resource type="Texture2D" uid="uid://78as601jqprf" path="res://AssetBundle/Sprites/UI/speed_button.png" id="1_f3hib"]
+[ext_resource type="Texture2D" uid="uid://bvr82h3rx2o3j" path="res://AssetBundle/Sprites/UI/speed_button_press.png" id="2_y61pp"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_51t72"]
+
+[node name="VirtualJoystick" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_horizontal_guides_ = [1025.0]
+
+[node name="Speed" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -270.0
+offset_top = -260.0
+offset_right = -270.0
+offset_bottom = -260.0
+grow_horizontal = 0
+grow_vertical = 0
+metadata/_edit_lock_ = true
+
+[node name="SpeedUp" type="TouchScreenButton" parent="Speed"]
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(-70, -76)
+scale = Vector2(1.4, 1.4)
+texture_normal = ExtResource("1_f3hib")
+texture_pressed = ExtResource("2_y61pp")
+action = "speed_up"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = -260.0
+offset_right = 70.0
+offset_bottom = -260.0
+grow_vertical = 0
+metadata/_edit_lock_ = true
+
+[node name="Virtual Joystick" parent="Control" instance=ExtResource("3_51t72")]
+modulate = Color(0.427451, 0.427451, 0.427451, 0.392157)
+layout_mode = 1
+offset_left = -70.0
+offset_top = -150.0
+offset_right = 230.0
+offset_bottom = 150.0
+scale = Vector2(1.4, 1.4)
+action_left = "left"
+action_right = "right"
+action_up = "up"
+action_down = "down"
+
+[editable path="Control/Virtual Joystick"]

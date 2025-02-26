@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cft6qfvqg8g54"]
+
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_peuk5"]
+[ext_resource type="PackedScene" uid="uid://dsdgs2b71fxmk" path="res://Scenes/head.tscn" id="2_ay4gx"]
+[ext_resource type="Script" path="res://Scripts/food_spawner.gd" id="3_8mgxe"]
+[ext_resource type="PackedScene" uid="uid://n41lbgr160k4" path="res://Scenes/virtual_joystick.tscn" id="4_4jy6l"]
+
+[node name="Main" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_peuk5")
+metadata/_edit_lock_ = true
+
+[node name="Head" parent="." instance=ExtResource("2_ay4gx")]
+position = Vector2(960, 540)
+
+[node name="Food" type="Node2D" parent="."]
+script = ExtResource("3_8mgxe")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SourceLabel" type="Label" parent="UI"]
+offset_left = 1644.0
+offset_top = 46.0
+offset_right = 1749.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "分数："
+
+[node name="VirtualJoystick" parent="UI" instance=ExtResource("4_4jy6l")]
