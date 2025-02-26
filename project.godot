@@ -10,7 +10,12 @@ config_version=5
 
 [application]
 
-config/name="SnakeBattle"
+config/name="贪吃蛇大战"
+config/name_localized={
+"en": "SnakeBattle",
+"zh": "贪吃蛇大战"
+}
+config/description="一个用 GODOT 游戏引擎编写的局域网贪吃蛇对战游戏"
 config/tags=PackedStringArray("main")
 run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")

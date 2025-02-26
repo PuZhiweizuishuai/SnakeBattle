@@ -154,7 +154,7 @@ func _on_area_entered(area):
 		# 蛇的长度增加
 		grow()
 	elif area.is_in_group("body"):
-		if area.get_index() > initial_length + 5:
+		if area.get_index() > initial_length + 2:
 			GameManager.play_die()
 			## 与身体发生碰撞，单人模式时结束游戏，多人模式时跳过此判断
 			GameManager.lose_game()			
