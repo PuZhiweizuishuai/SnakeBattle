@@ -12,14 +12,14 @@ It is currently unfinished and under development.
 
 ### UI
 
-[ ] UI design and production
+- [ ] UI design and production
 
 ### Single-player Mode
 
-[X] Boundless mode
+- [x] Boundless mode
 
-[ ] Bounded mode
+- [ ] Bounded mode
 
 ### Multiplayer Mode
 
-[ ] Create a room for online battles 
+- [ ] Create a room for online battles 
