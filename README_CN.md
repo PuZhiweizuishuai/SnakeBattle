@@ -25,5 +25,8 @@ English introduction: [Snake Battle](/README.md)
 
 - [ ] 创建房间联机对战
 
+## 字体版权
 
+游戏字体使用： [站酷快乐体](https://www.zcool.com.cn/special/zcoolfonts/)
 
+可免费商用

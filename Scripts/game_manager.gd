@@ -71,3 +71,7 @@ func restart_game() -> void:
 	
 func lose_game() -> void:
 	get_tree().change_scene_to_file("res://Scenes/lose_scene.tscn")
+
+# 加载单人无边界模式
+func load_single_player_borderless_mode():
+	get_tree().change_scene_to_file("res://Scenes/main.tscn")

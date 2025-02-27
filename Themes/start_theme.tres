@@ -1,0 +1,43 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b8y42dk6oe3va"]
+
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_3qch2"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="1_rytds"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b65e3"]
+content_margin_top = 50.0
+texture = ExtResource("1_3qch2")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e8rgq"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbefc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.498039, 0.631373, 0.764706, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpe0g"]
+
+[resource]
+default_font = ExtResource("1_rytds")
+AcceptDialog/font_sizes/title_font_size = 50
+AcceptDialog/styles/panel = SubResource("StyleBoxTexture_b65e3")
+Button/colors/font_color = Color(0.392157, 0.509804, 0.678431, 1)
+Button/colors/font_focus_color = Color(0.392157, 0.509804, 0.678431, 1)
+Button/colors/font_hover_color = Color(0.392157, 0.509804, 0.678431, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 0.784314)
+Button/colors/font_pressed_color = Color(0.211765, 0.454902, 0.709804, 0.784314)
+Button/constants/outline_size = 6
+Button/font_sizes/font_size = 80
+Button/styles/disabled = SubResource("StyleBoxEmpty_e8rgq")
+Button/styles/focus = SubResource("StyleBoxFlat_rbefc")
+Button/styles/hover = SubResource("StyleBoxEmpty_xpe0g")
+Button/styles/normal = SubResource("StyleBoxEmpty_e8rgq")
+Button/styles/pressed = SubResource("StyleBoxEmpty_e8rgq")
+Label/font_sizes/font_size = 100
+Label/fonts/font = ExtResource("1_rytds")

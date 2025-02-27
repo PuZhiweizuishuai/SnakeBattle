@@ -18,7 +18,7 @@ var direction = Vector2.RIGHT  # 初始移动方向
 
 @export var initial_length = 4 # 蛇的初始长度
 
-var viewport_size = get_viewport_rect().size
+var viewport_size = null
 
 func _ready():
 	# TODO 随机初始位置与方向
@@ -153,8 +153,8 @@ func _on_area_entered(area):
 		GameManager.play_eat()
 		# 蛇的长度增加
 		grow()
+		## 与身体发生碰撞，单人模式时结束游戏，多人模式时跳过此判断
 	elif area.is_in_group("body"):
 		if area.get_index() > initial_length + 2:
 			GameManager.play_die()
-			## 与身体发生碰撞，单人模式时结束游戏，多人模式时跳过此判断
 			GameManager.lose_game()			

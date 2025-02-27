@@ -1,0 +1,274 @@
+[gd_scene load_steps=20 format=3 uid="uid://cda6jw8nh3ltr"]
+
+[ext_resource type="Theme" uid="uid://b8y42dk6oe3va" path="res://Themes/start_theme.tres" id="1_41ynx"]
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_bewt2"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="1_xsr5r"]
+[ext_resource type="Script" path="res://Scripts/start_ui.gd" id="2_3oisg"]
+[ext_resource type="Texture2D" uid="uid://bkuiarprguvvn" path="res://AssetBundle/Sprites/Food/icecream-01.png" id="5_f0wrg"]
+[ext_resource type="Texture2D" uid="uid://wbltuswb64qe" path="res://AssetBundle/Sprites/Food/icecream-02.png" id="6_hu487"]
+[ext_resource type="Texture2D" uid="uid://dvk71c3kb6dwf" path="res://AssetBundle/Sprites/Food/icecream-03.png" id="7_cw4aj"]
+[ext_resource type="Texture2D" uid="uid://ddfu6703g6ws7" path="res://AssetBundle/Sprites/Food/icecream-04.png" id="8_0reuo"]
+[ext_resource type="Texture2D" uid="uid://8niy8xqnysal" path="res://AssetBundle/Sprites/Food/icecream-05.png" id="9_jg68c"]
+[ext_resource type="Texture2D" uid="uid://ch6bpci8g5unh" path="res://AssetBundle/Sprites/Food/icecream-06.png" id="10_4vjkh"]
+[ext_resource type="Texture2D" uid="uid://dpg5ftnvtinut" path="res://AssetBundle/Sprites/Food/icecream-07.png" id="11_hvpva"]
+[ext_resource type="Texture2D" uid="uid://78hb6ri51npn" path="res://AssetBundle/Sprites/Food/icecream-08.png" id="12_xdmjs"]
+[ext_resource type="Texture2D" uid="uid://8uvcy8cwt8gn" path="res://AssetBundle/Sprites/Food/icecream-09.png" id="13_s8sjm"]
+[ext_resource type="Texture2D" uid="uid://di0gryx2lq5tk" path="res://AssetBundle/Sprites/UI/exit.png" id="14_jbafl"]
+[ext_resource type="Texture2D" uid="uid://d4aewh61m78m8" path="res://AssetBundle/Sprites/UI/exit_hover.png" id="15_jcqj3"]
+[ext_resource type="Texture2D" uid="uid://cmfglgc0uj207" path="res://AssetBundle/Sprites/Background/shadow.png" id="16_t18gk"]
+
+[sub_resource type="Animation" id="Animation_8qg8x"]
+resource_name = "start_menu_admission"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.517632, 1),
+"update": 0,
+"values": [Vector2(712, 1090), Vector2(712, 483)]
+}
+
+[sub_resource type="Animation" id="Animation_0bqel"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(712, 1090)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mkbe0"]
+_data = {
+"RESET": SubResource("Animation_0bqel"),
+"start_menu_admission": SubResource("Animation_8qg8x")
+}
+
+[node name="StartUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_41ynx")
+script = ExtResource("2_3oisg")
+metadata/_edit_horizontal_guides_ = [624.0]
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 169.0
+offset_bottom = 192.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.952941, 0.505882, 0.505882, 1)
+theme_override_colors/font_shadow_color = Color(0.988235, 0.890196, 0.541176, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_fonts/font = ExtResource("1_xsr5r")
+theme_override_font_sizes/font_size = 170
+text = "贪吃蛇大战"
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.0
+offset_top = 550.0
+offset_right = 248.0
+offset_bottom = 950.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SingleGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_xsr5r")
+text = "  单人游戏  "
+language = "zh"
+
+[node name="Multiplayer" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_xsr5r")
+text = "  多人游戏  "
+language = "zh"
+
+[node name="Setting" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_xsr5r")
+text = "设    置"
+
+[node name="About" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("1_xsr5r")
+text = "关    于"
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -99
+position = Vector2(960, 540)
+texture = ExtResource("1_bewt2")
+metadata/_edit_lock_ = true
+
+[node name="Food" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.556863)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Food"]
+position = Vector2(248, 368)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("5_f0wrg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Food"]
+position = Vector2(1474, 530)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("6_hu487")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Food"]
+position = Vector2(266, 856)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("7_cw4aj")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Food"]
+position = Vector2(570, 444)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("8_0reuo")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Food"]
+position = Vector2(1632, 838)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("9_jg68c")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Food"]
+position = Vector2(514, 844)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("10_4vjkh")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Food"]
+position = Vector2(348, 596)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("11_hvpva")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Food"]
+position = Vector2(1760, 384)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("12_xdmjs")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Food"]
+position = Vector2(1330, 758)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("13_s8sjm")
+
+[node name="ExitBtn" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_top = 29.0
+offset_right = 89.9999
+offset_bottom = 229.0
+grow_horizontal = 0
+scale = Vector2(0.28712, 0.28712)
+tooltip_text = "退出"
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_41ynx")
+texture_normal = ExtResource("14_jbafl")
+texture_pressed = ExtResource("15_jcqj3")
+texture_hover = ExtResource("15_jcqj3")
+metadata/_edit_lock_ = true
+
+[node name="ShowStartMenuAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mkbe0")
+}
+autoplay = "start_menu_admission"
+
+[node name="ExitDialog" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="ExitDialog"]
+layout_mode = 0
+offset_left = -399.0
+offset_top = -239.0
+offset_right = 881.0
+offset_bottom = 481.0
+scale = Vector2(0.675, 0.68)
+texture = ExtResource("16_t18gk")
+
+[node name="TextureRect" type="TextureRect" parent="ExitDialog"]
+modulate = Color(0.819608, 0.913725, 0.964706, 1)
+layout_mode = 0
+offset_left = -393.0
+offset_top = -232.0
+offset_right = 1527.0
+offset_bottom = 848.0
+scale = Vector2(0.439999, 0.439999)
+texture = ExtResource("1_bewt2")
+
+[node name="Label" type="Label" parent="ExitDialog"]
+layout_mode = 0
+offset_left = -303.0
+offset_top = -165.0
+offset_right = 397.0
+offset_bottom = -64.0
+theme_override_colors/font_color = Color(0.133333, 0.156863, 0.192157, 1)
+text = "确认要退出吗？"
+
+[node name="ConfirmExitBtn" type="Button" parent="ExitDialog"]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 104.0
+offset_right = 343.0
+offset_bottom = 201.0
+mouse_default_cursor_shape = 2
+text = "确认"
+
+[node name="CancelExitBtn" type="Button" parent="ExitDialog"]
+layout_mode = 0
+offset_left = -270.0
+offset_top = 104.0
+offset_right = -94.0
+offset_bottom = 201.0
+mouse_default_cursor_shape = 2
+text = "取消"
+
+[connection signal="pressed" from="VBoxContainer/SingleGame" to="." method="_on_single_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="VBoxContainer/Setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="VBoxContainer/About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="ExitDialog/ConfirmExitBtn" to="." method="_on_confirm_exit_btn_pressed"]
+[connection signal="pressed" from="ExitDialog/CancelExitBtn" to="." method="_on_cancel_exit_btn_pressed"]
