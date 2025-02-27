@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
 func _on_exit_btn_pressed() -> void:
 	if exit_dialog.visible != true:
 		exit_dialog.visible = true
+		$AnimationPlayer.play("show_exit_dialog_animation")
 
 
 # 确认退出事件

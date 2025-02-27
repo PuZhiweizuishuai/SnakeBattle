@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cda6jw8nh3ltr"]
+[gd_scene load_steps=23 format=3 uid="uid://cda6jw8nh3ltr"]
 
 [ext_resource type="Theme" uid="uid://b8y42dk6oe3va" path="res://Themes/start_theme.tres" id="1_41ynx"]
 [ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_bewt2"]
@@ -17,21 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://d4aewh61m78m8" path="res://AssetBundle/Sprites/UI/exit_hover.png" id="15_jcqj3"]
 [ext_resource type="Texture2D" uid="uid://cmfglgc0uj207" path="res://AssetBundle/Sprites/Background/shadow.png" id="16_t18gk"]
 
-[sub_resource type="Animation" id="Animation_8qg8x"]
-resource_name = "start_menu_admission"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VBoxContainer:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.517632, 1),
-"update": 0,
-"values": [Vector2(712, 1090), Vector2(712, 483)]
-}
-
 [sub_resource type="Animation" id="Animation_0bqel"]
 length = 0.001
 tracks/0/type = "value"
@@ -47,10 +32,62 @@ tracks/0/keys = {
 "values": [Vector2(712, 1090)]
 }
 
+[sub_resource type="Animation" id="Animation_8qg8x"]
+resource_name = "start_menu_admission"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.517632, 1),
+"update": 0,
+"values": [Vector2(712, 1090), Vector2(712, 483)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mkbe0"]
 _data = {
 "RESET": SubResource("Animation_0bqel"),
 "start_menu_admission": SubResource("Animation_8qg8x")
+}
+
+[sub_resource type="Animation" id="Animation_km8bc"]
+resource_name = "show_exit_dialog_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExitDialog:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ixs3v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExitDialog:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cpflu"]
+_data = {
+"RESET": SubResource("Animation_ixs3v"),
+"show_exit_dialog_animation": SubResource("Animation_km8bc")
 }
 
 [node name="StartUI" type="Control"]
@@ -206,6 +243,7 @@ autoplay = "start_menu_admission"
 
 [node name="ExitDialog" type="Control" parent="."]
 visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -264,6 +302,11 @@ offset_right = -94.0
 offset_bottom = 201.0
 mouse_default_cursor_shape = 2
 text = "取消"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cpflu")
+}
 
 [connection signal="pressed" from="VBoxContainer/SingleGame" to="." method="_on_single_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]
