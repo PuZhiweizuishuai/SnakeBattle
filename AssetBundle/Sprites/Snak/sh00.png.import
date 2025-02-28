@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coxc7p1gakam0"
-path="res://.godot/imported/sb0102.png-7041dfc3f3567a2c856911be922c673c.ctex"
+uid="uid://dnexfymnnjg2v"
+path="res://.godot/imported/sh00.png-9c399313fb919b37ada062eb909dcf5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://AssetBundle/Sprites/Snak/sb0102.png"
-dest_files=["res://.godot/imported/sb0102.png-7041dfc3f3567a2c856911be922c673c.ctex"]
+source_file="res://AssetBundle/Sprites/Snak/sh00.png"
+dest_files=["res://.godot/imported/sh00.png-9c399313fb919b37ada062eb909dcf5b.ctex"]
 
 [params]
 

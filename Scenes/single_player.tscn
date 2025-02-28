@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cft6qfvqg8g54"]
+
+[ext_resource type="Script" path="res://Scripts/single_player.gd" id="1_g7y1d"]
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="2_tennv"]
+[ext_resource type="PackedScene" uid="uid://dsdgs2b71fxmk" path="res://Scenes/head.tscn" id="3_o7i7o"]
+[ext_resource type="Script" path="res://Scripts/food_spawner.gd" id="4_0nwdx"]
+[ext_resource type="PackedScene" uid="uid://n41lbgr160k4" path="res://Scenes/virtual_joystick.tscn" id="5_nq35i"]
+[ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="6_jf4f1"]
+
+[node name="SinglePlayer" type="Node2D"]
+script = ExtResource("1_g7y1d")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_tennv")
+metadata/_edit_lock_ = true
+
+[node name="Head" parent="." instance=ExtResource("3_o7i7o")]
+position = Vector2(960, 540)
+
+[node name="Food" type="Node2D" parent="."]
+script = ExtResource("4_0nwdx")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SourceLabel" type="Label" parent="UI"]
+offset_left = 1644.0
+offset_top = 46.0
+offset_right = 1749.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "分数："
+
+[node name="VirtualJoystick" parent="UI" instance=ExtResource("5_nq35i")]
+
+[node name="BackBtn" type="TextureButton" parent="UI"]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 36.0
+offset_top = 36.0
+offset_right = 262.0
+offset_bottom = 236.0
+scale = Vector2(0.2, 0.2)
+tooltip_text = "返回"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_jf4f1")
+
+[connection signal="pressed" from="UI/BackBtn" to="." method="_on_back_btn_pressed"]

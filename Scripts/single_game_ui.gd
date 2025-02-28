@@ -2,6 +2,8 @@ extends Control
 
 @onready var blue_snake = $SkinContainer/HBoxContainer/BlueSnakeButton/Sprite2D
 @onready var yelow_snake = $SkinContainer/HBoxContainer/YellowSnakeButton/Sprite2D
+@onready var girl_snake = $SkinContainer/HBoxContainer/GirlSnakeButton/Sprite2D
+@onready var chouxiang_snake = $SkinContainer/HBoxContainer/ChouxiangSnakeButton2/Sprite2D
 
 @onready var bm = $ModeContainer/HBoxContainer/BoundaryMode/Sprite2D
 @onready var fm = $ModeContainer/HBoxContainer/FreeMode/Sprite2D
@@ -45,9 +47,33 @@ func _on_yellow_snake_button_pressed() -> void:
 	GameManager.SingleGameSkin = 1
 	yelow_snake.visible = true
 	blue_snake.visible = false
-
+	girl_snake.visible = false
+	chouxiang_snake.visible = false
+	
 # 切换蓝色小蛇
 func _on_blue_snake_button_pressed() -> void:
 	GameManager.SingleGameSkin = 0
 	yelow_snake.visible = false
 	blue_snake.visible = true
+	girl_snake.visible = false
+	chouxiang_snake.visible = false
+
+
+
+
+# 切换女孩
+func _on_girs_snake_button_pressed() -> void:
+	GameManager.SingleGameSkin = 2
+	girl_snake.visible = true
+	yelow_snake.visible = false
+	blue_snake.visible = false
+	chouxiang_snake.visible = false
+
+
+# 抽象皮肤
+func _on_chouxiang_snake_button_2_pressed() -> void:
+	GameManager.SingleGameSkin = 3
+	girl_snake.visible = false
+	yelow_snake.visible = false
+	blue_snake.visible = false
+	chouxiang_snake.visible = true

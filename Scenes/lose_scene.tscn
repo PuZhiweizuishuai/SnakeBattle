@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://xhkh3sia8ov5"]
+[gd_scene load_steps=3 format=3 uid="uid://xhkh3sia8ov5"]
 
 [ext_resource type="Script" path="res://Scripts/lose_scene.gd" id="1_bps60"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_ex371"]
 
 [node name="LoseScene" type="Control"]
 layout_mode = 3
@@ -13,31 +14,34 @@ script = ExtResource("1_bps60")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 244.0
-offset_top = 1.0
-offset_right = 1042.0
-offset_bottom = 364.0
+offset_left = 534.0
+offset_top = 176.0
+offset_right = 1332.0
+offset_bottom = 539.0
 theme_override_colors/font_color = Color(0.515101, 0.343711, 0.37903, 1)
+theme_override_fonts/font = ExtResource("2_ex371")
 theme_override_font_sizes/font_size = 266
 text = "你输了"
 
 [node name="SourceLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 414.0
-offset_top = 334.0
-offset_right = 1212.0
-offset_bottom = 697.0
+offset_left = 704.0
+offset_top = 509.0
+offset_right = 1502.0
+offset_bottom = 872.0
 theme_override_colors/font_color = Color(0.515101, 0.343711, 0.37903, 1)
+theme_override_fonts/font = ExtResource("2_ex371")
 theme_override_font_sizes/font_size = 121
 text = "得分："
 
 [node name="RestartBtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 574.0
-offset_top = 529.0
-offset_right = 674.0
-offset_bottom = 601.0
-theme_override_font_sizes/font_size = 46
+offset_left = 806.0
+offset_top = 729.0
+offset_right = 1014.0
+offset_bottom = 838.0
+theme_override_fonts/font = ExtResource("2_ex371")
+theme_override_font_sizes/font_size = 100
 text = "重开"
 
 [connection signal="button_down" from="RestartBtn" to="." method="_on_restart_btn_button_down"]

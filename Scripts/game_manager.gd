@@ -26,7 +26,7 @@ const FOOD_MARGIN = 40
 var SingleGameMode : int = 0
 
 # 单人游戏皮肤
-# 0 蓝，1 黄
+# 0 蓝，1 黄, 2 少女
 var SingleGameSkin : int = 0
 
 # BGM
@@ -67,14 +67,14 @@ func play_die() -> void:
 
 func add_source(x: int) -> void:
 	source = source + x	
-	get_node("/root/Main/UI/SourceLabel").text = "分数：" + str(source)
+	get_node("/root/SinglePlayer/UI/SourceLabel").text = "分数：" + str(source)
 
 func start_game() -> void:
 	source = 0
 	
 
 func restart_game() -> void:
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	get_tree().change_scene_to_file("res://Scenes/single_player.tscn")
 	start_game()
 	
 func lose_game() -> void:

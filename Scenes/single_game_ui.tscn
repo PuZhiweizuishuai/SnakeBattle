@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://c25ehb6pdmer7"]
+[gd_scene load_steps=12 format=3 uid="uid://c25ehb6pdmer7"]
 
 [ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_nlnhk"]
 [ext_resource type="Theme" uid="uid://b8y42dk6oe3va" path="res://Themes/start_theme.tres" id="1_xuxyk"]
 [ext_resource type="Script" path="res://Scripts/single_game_ui.gd" id="2_pbs3q"]
 [ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_qanid"]
-[ext_resource type="Texture2D" uid="uid://dnexfymnnjg2v" path="res://AssetBundle/Sprites/Snak/sh01.png" id="3_xhklr"]
-[ext_resource type="Texture2D" uid="uid://b67spuhtb2nb" path="res://AssetBundle/Sprites/Snak/sh02.png" id="5_cgffx"]
+[ext_resource type="Texture2D" uid="uid://dnexfymnnjg2v" path="res://AssetBundle/Sprites/Snak/sh00.png" id="3_xhklr"]
+[ext_resource type="Texture2D" uid="uid://b67spuhtb2nb" path="res://AssetBundle/Sprites/Snak/sh01.png" id="5_cgffx"]
 [ext_resource type="Texture2D" uid="uid://cq41o0xrunky5" path="res://AssetBundle/Sprites/UI/course.png" id="7_a6yqh"]
+[ext_resource type="Texture2D" uid="uid://cpi2vkdhap0ym" path="res://AssetBundle/Sprites/Snak/sh02.png" id="7_np4mt"]
+[ext_resource type="Texture2D" uid="uid://dw7rd0s7j0b1c" path="res://AssetBundle/Sprites/Snak/sh03.png" id="8_b7w13"]
 [ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="9_8g4d7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xap2w"]
@@ -52,10 +54,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -786.0
-offset_top = -413.0
-offset_right = -57.0
-offset_bottom = -199.0
+offset_left = -811.0
+offset_top = -414.0
+offset_right = 812.0
+offset_bottom = -198.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 18
@@ -89,6 +91,26 @@ text = "黄色小蛇"
 visible = false
 position = Vector2(-18.5, 46)
 texture = ExtResource("5_cgffx")
+
+[node name="GirlSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "卡通小蛇"
+
+[node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/GirlSnakeButton"]
+visible = false
+position = Vector2(-18.5, 46)
+texture = ExtResource("7_np4mt")
+
+[node name="ChouxiangSnakeButton2" type="Button" parent="SkinContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "抽象小蛇"
+
+[node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/ChouxiangSnakeButton2"]
+visible = false
+position = Vector2(-18.5, 46)
+texture = ExtResource("8_b7w13")
 
 [node name="ModeContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -179,6 +201,8 @@ text = "开始游戏"
 
 [connection signal="pressed" from="SkinContainer/HBoxContainer/BlueSnakeButton" to="." method="_on_blue_snake_button_pressed"]
 [connection signal="pressed" from="SkinContainer/HBoxContainer/YellowSnakeButton" to="." method="_on_yellow_snake_button_pressed"]
+[connection signal="pressed" from="SkinContainer/HBoxContainer/GirlSnakeButton" to="." method="_on_girs_snake_button_pressed"]
+[connection signal="pressed" from="SkinContainer/HBoxContainer/ChouxiangSnakeButton2" to="." method="_on_chouxiang_snake_button_2_pressed"]
 [connection signal="pressed" from="ModeContainer/HBoxContainer/BoundaryMode" to="." method="_on_boundary_mode_pressed"]
 [connection signal="pressed" from="ModeContainer/HBoxContainer/FreeMode" to="." method="_on_free_mode_pressed"]
 [connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]

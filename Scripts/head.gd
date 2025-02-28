@@ -3,7 +3,10 @@ extends Area2D
 @export var use_gpu_instancing = true
 
 @export var SPEED = 200.0            # 基础移动速度
-const BODY_SEGMENT = preload("res://Scenes/body_segment.tscn")  # 身体预制件
+var BODY_SEGMENT = preload("res://Scenes/body_segment.tscn")  # 身体预制件
+# 头部
+@onready var head = $Sprite2D
+
 const BASE_SEGMENT_GAP = 30       # 固定的基础间距
 var current_speed = SPEED          # 当前实际速度
 var trail_sample_distance = 0.0    # 轨迹采样距离累计器
@@ -27,6 +30,11 @@ func _ready():
 	start_game()
 
 func start_game():
+	# 初始化皮肤
+	# 蓝皮
+
+
+	head.texture = load("res://AssetBundle/Sprites/Snak/sh0"+ str(GameManager.SingleGameSkin) +".png")
 	body_segments.clear()
 	trail_positions = [global_position]  # 初始化轨迹记录
 	# 新增：添加初始的轨迹点和身体段
@@ -54,15 +62,23 @@ func _physics_process(delta: float) -> void:
 	position += direction * current_speed * delta
 	rotation = direction.angle() + TAU / 4
 	
-	# 处理屏幕边界穿越
-	if position.x < 0:
-		position.x = viewport_size.x
-	elif position.x > viewport_size.x:
-		position.x = 0
-	if position.y < 0:
-		position.y = viewport_size.y
-	elif position.y > viewport_size.y:
-		position.y = 0
+	# 模式管理
+	if GameManager.SingleGameMode == 0:
+		# 处理屏幕边界穿越
+		if position.x < 0 or position.x > viewport_size.x or position.y < 0 or position.y > viewport_size.y:
+			# 游戏结束
+			GameManager.play_die()
+			GameManager.lose_game()
+	else:
+		# 处理屏幕边界穿越
+		if position.x < 0:
+			position.x = viewport_size.x
+		elif position.x > viewport_size.x:
+			position.x = 0
+		if position.y < 0:
+			position.y = viewport_size.y
+		elif position.y > viewport_size.y:
+			position.y = 0
 	
 	# 修改轨迹记录逻辑
 	trail_positions[0] = global_position

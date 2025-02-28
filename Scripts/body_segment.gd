@@ -5,10 +5,14 @@ var prev_body = null
 # 下一个身体
 var next_body = null
 
+@onready var body = $Sprite2D
+
 # 身体之间的最小距离
 @export var min_body_distance: float = 45.0
 
 func _ready():
+		# 蓝皮
+	body.texture = load("res://AssetBundle/Sprites/Snak/sb0"+ str(GameManager.SingleGameSkin) +".png")
 	add_to_group("body")
 	$CollisionShape2D.disabled = false 
 
