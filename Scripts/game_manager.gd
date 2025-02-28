@@ -21,6 +21,14 @@ const SHOW_RANGE = Vector2(1920, 1080)
 
 const FOOD_MARGIN = 40
 
+# 单人游戏模式
+# 0 边界模式 1 自由模式
+var SingleGameMode : int = 0
+
+# 单人游戏皮肤
+# 0 蓝，1 黄
+var SingleGameSkin : int = 0
+
 # BGM
 func _audioBgmPlayer() -> void:
 	audioBgmPlayer = AudioStreamPlayer.new()
@@ -72,6 +80,10 @@ func restart_game() -> void:
 func lose_game() -> void:
 	get_tree().change_scene_to_file("res://Scenes/lose_scene.tscn")
 
-# 加载单人无边界模式
+# 加载单人模式
 func load_single_player_borderless_mode():
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	get_tree().change_scene_to_file("res://Scenes/single_game_ui.tscn")
+	
+# 加载主界面
+func load_start_ui():
+	get_tree().change_scene_to_file("res://Scenes/start_ui.tscn")

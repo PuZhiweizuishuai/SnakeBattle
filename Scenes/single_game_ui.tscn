@@ -1,0 +1,185 @@
+[gd_scene load_steps=10 format=3 uid="uid://c25ehb6pdmer7"]
+
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_nlnhk"]
+[ext_resource type="Theme" uid="uid://b8y42dk6oe3va" path="res://Themes/start_theme.tres" id="1_xuxyk"]
+[ext_resource type="Script" path="res://Scripts/single_game_ui.gd" id="2_pbs3q"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_qanid"]
+[ext_resource type="Texture2D" uid="uid://dnexfymnnjg2v" path="res://AssetBundle/Sprites/Snak/sh01.png" id="3_xhklr"]
+[ext_resource type="Texture2D" uid="uid://b67spuhtb2nb" path="res://AssetBundle/Sprites/Snak/sh02.png" id="5_cgffx"]
+[ext_resource type="Texture2D" uid="uid://cq41o0xrunky5" path="res://AssetBundle/Sprites/UI/course.png" id="7_a6yqh"]
+[ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="9_8g4d7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xap2w"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.345098, 0.345098, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.345098, 0.345098, 0.392157)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[node name="SingleGameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xuxyk")
+script = ExtResource("2_pbs3q")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_nlnhk")
+
+[node name="SkinContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -786.0
+offset_top = -413.0
+offset_right = -57.0
+offset_bottom = -199.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="SkinLable" type="Label" parent="SkinContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.133333, 0.156863, 0.192157, 1)
+theme_override_fonts/font = ExtResource("2_qanid")
+theme_override_font_sizes/font_size = 100
+text = "皮肤"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SkinContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="BlueSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "蓝色小蛇"
+
+[node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/BlueSnakeButton"]
+position = Vector2(-23.5, 46)
+texture = ExtResource("3_xhklr")
+
+[node name="YellowSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "黄色小蛇"
+
+[node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/YellowSnakeButton"]
+visible = false
+position = Vector2(-18.5, 46)
+texture = ExtResource("5_cgffx")
+
+[node name="ModeContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -786.0
+offset_top = -108.0
+offset_right = -57.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="ModeLable" type="Label" parent="ModeContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.133333, 0.156863, 0.192157, 1)
+theme_override_fonts/font = ExtResource("2_qanid")
+theme_override_font_sizes/font_size = 100
+text = "模式"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ModeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="BoundaryMode" type="Button" parent="ModeContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "边界模式"
+
+[node name="Sprite2D" type="Sprite2D" parent="ModeContainer/HBoxContainer/BoundaryMode"]
+position = Vector2(-29.5, 39)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("7_a6yqh")
+
+[node name="FreeMode" type="Button" parent="ModeContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "自由模式"
+
+[node name="Sprite2D" type="Sprite2D" parent="ModeContainer/HBoxContainer/FreeMode"]
+visible = false
+position = Vector2(-29.5, 39)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("7_a6yqh")
+
+[node name="BackBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 36.0
+offset_right = 262.0
+offset_bottom = 236.0
+scale = Vector2(0.2, 0.2)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_8g4d7")
+
+[node name="StartBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -204.0
+offset_top = -285.0
+offset_right = 204.0
+offset_bottom = -176.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_qanid")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_xap2w")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xap2w")
+text = "开始游戏"
+
+[connection signal="pressed" from="SkinContainer/HBoxContainer/BlueSnakeButton" to="." method="_on_blue_snake_button_pressed"]
+[connection signal="pressed" from="SkinContainer/HBoxContainer/YellowSnakeButton" to="." method="_on_yellow_snake_button_pressed"]
+[connection signal="pressed" from="ModeContainer/HBoxContainer/BoundaryMode" to="." method="_on_boundary_mode_pressed"]
+[connection signal="pressed" from="ModeContainer/HBoxContainer/FreeMode" to="." method="_on_free_mode_pressed"]
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="StartBtn" to="." method="_on_start_btn_pressed"]
