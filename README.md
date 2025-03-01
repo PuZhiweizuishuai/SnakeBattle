@@ -8,6 +8,21 @@ A local area network (LAN) Snake battle game written with the GODOT game engine.
 
 It is currently unfinished and under development.
 
+## Screenshot
+
+### Main Menu
+
+![主菜单](/screenshot/01.png)
+
+
+### Single-player Mode
+
+
+![单人模式](/screenshot/02.png)
+
+![单人游戏](/screenshot/03.png)
+
+
 ## Development Progress
 
 ### UI
@@ -18,7 +33,7 @@ It is currently unfinished and under development.
 
 - [x] Boundless mode
 
-- [ ] Bounded mode
+- [x] Bounded mode
 
 ### Multiplayer Mode
 

@@ -23,7 +23,13 @@ var direction = Vector2.RIGHT  # 初始移动方向
 
 var viewport_size = null
 
+@onready var joystick = $"../UI/VirtualJoystick"
+
 func _ready():
+	if OS.get_name() == "Windows":
+		joystick.visible = false
+		remove_child(joystick)
+		joystick.queue_free()
 	# TODO 随机初始位置与方向
 	viewport_size = get_viewport_rect().size
 	direction = Vector2.RIGHT
@@ -31,9 +37,6 @@ func _ready():
 
 func start_game():
 	# 初始化皮肤
-	# 蓝皮
-
-
 	head.texture = load("res://AssetBundle/Sprites/Snak/sh0"+ str(GameManager.SingleGameSkin) +".png")
 	body_segments.clear()
 	trail_positions = [global_position]  # 初始化轨迹记录

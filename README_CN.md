@@ -8,6 +8,26 @@ English introduction: [Snake Battle](/README.md)
 
 目前暂未完成，开发中
 
+## 运行截图
+
+### 主菜单
+
+![主菜单](/screenshot/01.png)
+
+
+### 单人模式
+
+![单人模式](/screenshot/02.png)
+
+
+
+![单人游戏](/screenshot/03.png)
+
+### 多人模式
+
+
+开发中。。。
+
 
 ## 开发进度
 
@@ -19,7 +39,7 @@ English introduction: [Snake Battle](/README.md)
 
 - [X] 无边界模式
 
-- [ ] 边界界模式
+- [X] 边界界模式
 
 ### 多人模式
 
