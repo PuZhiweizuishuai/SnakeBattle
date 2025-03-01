@@ -87,3 +87,7 @@ func load_single_player_borderless_mode():
 # 加载主界面
 func load_start_ui():
 	get_tree().change_scene_to_file("res://Scenes/start_ui.tscn")
+
+# 加载多人模式
+func load_multiplayer_first_ui():
+	get_tree().change_scene_to_file("res://Scenes/multiplayer_first_ui.tscn")

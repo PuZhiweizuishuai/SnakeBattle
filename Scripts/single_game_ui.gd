@@ -1,21 +1,36 @@
 extends Control
 
-@onready var blue_snake = $SkinContainer/HBoxContainer/BlueSnakeButton/Sprite2D
-@onready var yelow_snake = $SkinContainer/HBoxContainer/YellowSnakeButton/Sprite2D
-@onready var girl_snake = $SkinContainer/HBoxContainer/GirlSnakeButton/Sprite2D
-@onready var chouxiang_snake = $SkinContainer/HBoxContainer/ChouxiangSnakeButton2/Sprite2D
 
-@onready var bm = $ModeContainer/HBoxContainer/BoundaryMode/Sprite2D
-@onready var fm = $ModeContainer/HBoxContainer/FreeMode/Sprite2D
+# 将皮肤和模式对应的Sprite组织成数组
+@onready var skin_sprites = [
+	$SkinContainer/HBoxContainer/BlueSnakeButton/Sprite2D,
+	$SkinContainer/HBoxContainer/YellowSnakeButton/Sprite2D,
+	$SkinContainer/HBoxContainer/GirlSnakeButton/Sprite2D,
+	$SkinContainer/HBoxContainer/ChouxiangSnakeButton2/Sprite2D
+]
+
+@onready var mode_sprites = [
+	$ModeContainer/HBoxContainer/BoundaryMode/Sprite2D,
+	$ModeContainer/HBoxContainer/FreeMode/Sprite2D
+]
+
+# 通用皮肤选择函数
+func select_skin(index: int) -> void:
+	for i in skin_sprites.size():
+		skin_sprites[i].visible = (i == index)
+	GameManager.SingleGameSkin = index
+
+# 通用模式选择函数
+func select_mode(index: int) -> void:
+	for i in mode_sprites.size():
+		mode_sprites[i].visible = (i == index)
+	GameManager.SingleGameMode = index
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	blue_snake.visible = true
-	bm.visible = true
-	yelow_snake.visible = false
-	fm.visible = false
-	GameManager.SingleGameMode = 0
-	GameManager.SingleGameSkin = 0
+	# 初始化时选择第一个皮肤和模式
+	select_skin(0)
+	select_mode(0)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -32,48 +47,25 @@ func _on_start_btn_pressed() -> void:
 
 # 切换自由模式
 func _on_free_mode_pressed() -> void:
-	fm.visible = true
-	bm.visible = false
-	GameManager.SingleGameMode = 1
+	select_mode(1)
 
 # 切换边界模式
 func _on_boundary_mode_pressed() -> void:
-	GameManager.SingleGameMode = 0
-	bm.visible = true
-	fm.visible = false
+	select_mode(0)
 
-# 切换黄色小蛇
-func _on_yellow_snake_button_pressed() -> void:
-	GameManager.SingleGameSkin = 1
-	yelow_snake.visible = true
-	blue_snake.visible = false
-	girl_snake.visible = false
-	chouxiang_snake.visible = false
-	
-# 切换蓝色小蛇
+
+# 皮肤按钮处理（示例：蓝色按钮）
 func _on_blue_snake_button_pressed() -> void:
-	GameManager.SingleGameSkin = 0
-	yelow_snake.visible = false
-	blue_snake.visible = true
-	girl_snake.visible = false
-	chouxiang_snake.visible = false
+	select_skin(0)
 
-
+func _on_yellow_snake_button_pressed() -> void:
+	select_skin(1)
 
 
 # 切换女孩
 func _on_girs_snake_button_pressed() -> void:
-	GameManager.SingleGameSkin = 2
-	girl_snake.visible = true
-	yelow_snake.visible = false
-	blue_snake.visible = false
-	chouxiang_snake.visible = false
-
+	select_skin(2)
 
 # 抽象皮肤
 func _on_chouxiang_snake_button_2_pressed() -> void:
-	GameManager.SingleGameSkin = 3
-	girl_snake.visible = false
-	yelow_snake.visible = false
-	blue_snake.visible = false
-	chouxiang_snake.visible = true
+	select_skin(3)

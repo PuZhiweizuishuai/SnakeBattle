@@ -55,9 +55,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -811.0
-offset_top = -414.0
+offset_top = -386.0
 offset_right = 812.0
-offset_bottom = -198.0
+offset_bottom = -170.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 18
@@ -66,7 +66,7 @@ theme_override_constants/separation = 18
 layout_mode = 2
 theme_override_colors/font_color = Color(0.133333, 0.156863, 0.192157, 1)
 theme_override_fonts/font = ExtResource("2_qanid")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 80
 text = "皮肤"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SkinContainer"]
@@ -76,7 +76,7 @@ theme_override_constants/separation = 90
 [node name="BlueSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "蓝色小蛇"
+text = "蓝色"
 
 [node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/BlueSnakeButton"]
 position = Vector2(-23.5, 46)
@@ -85,7 +85,7 @@ texture = ExtResource("3_xhklr")
 [node name="YellowSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "黄色小蛇"
+text = "黄色"
 
 [node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/YellowSnakeButton"]
 visible = false
@@ -95,7 +95,7 @@ texture = ExtResource("5_cgffx")
 [node name="GirlSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "卡通小蛇"
+text = "卡通"
 
 [node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/GirlSnakeButton"]
 visible = false
@@ -105,7 +105,7 @@ texture = ExtResource("7_np4mt")
 [node name="ChouxiangSnakeButton2" type="Button" parent="SkinContainer/HBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "抽象小蛇"
+text = "抽象"
 
 [node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/ChouxiangSnakeButton2"]
 visible = false
@@ -119,10 +119,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -786.0
-offset_top = -108.0
-offset_right = -57.0
-offset_bottom = 106.0
+offset_left = -802.5
+offset_top = -81.0
+offset_right = -40.5
+offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 18
@@ -131,7 +131,7 @@ theme_override_constants/separation = 18
 layout_mode = 2
 theme_override_colors/font_color = Color(0.133333, 0.156863, 0.192157, 1)
 theme_override_fonts/font = ExtResource("2_qanid")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 80
 text = "模式"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ModeContainer"]
@@ -198,6 +198,16 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_xap2w")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_xap2w")
 theme_override_styles/normal = SubResource("StyleBoxFlat_xap2w")
 text = "开始游戏"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 14.0
+offset_right = 514.0
+offset_bottom = 115.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 80
+text = "单人游戏"
 
 [connection signal="pressed" from="SkinContainer/HBoxContainer/BlueSnakeButton" to="." method="_on_blue_snake_button_pressed"]
 [connection signal="pressed" from="SkinContainer/HBoxContainer/YellowSnakeButton" to="." method="_on_yellow_snake_button_pressed"]

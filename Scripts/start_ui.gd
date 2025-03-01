@@ -49,10 +49,9 @@ func _on_setting_pressed() -> void:
 
 # 进入多人游戏界面
 func _on_multiplayer_pressed() -> void:
-	pass # Replace with function body.
+	GameManager.load_multiplayer_first_ui()
 
 
 # 进入单人游戏界面
 func _on_single_game_pressed() -> void:
-	# TODO 此条只是为了测试，后期更换为单人游戏选项界面
 	GameManager.load_single_player_borderless_mode()
