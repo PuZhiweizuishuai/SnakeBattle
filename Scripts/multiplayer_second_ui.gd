@@ -7,12 +7,26 @@ var USER_INFO = preload("res://Scenes/multiplayer_user_info.tscn")
 
 @onready var start_game_btn = $StartGameBtn
 @onready var prepare_btn = $PrepareBtn
+@onready var ip_lable = $IP
 
 # 当前用户是否准备好了
 var game_ready_to = false
 var skin_repeat = false
 
 var _turn := -1
+
+func get_local_ip() -> String:
+	var ip_addresses = IP.get_local_addresses()
+	var ip : String = ""
+	# 检查是否有可用的IP地址
+	if ip_addresses.size() > 0:
+		for address in ip_addresses:
+			# 暂时只显示IPV4地址
+			if address.count(".") == 3 && !address.begins_with("127.") && !address.begins_with("fe80:") && !address.begins_with("0:"):
+				ip = ip + address + ", "
+	else:
+		print("未找到本地IP地址。")
+	return ip
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,9 +38,12 @@ func _ready() -> void:
 	NetworkGameManager.server_closed.connect(_on_server_closed)
 	# 根据是否是服务器来显示对应按钮
 	if multiplayer.is_server():
+		# 获取本地所有IP地址,只有房主才显示
+		ip_lable.text = "房间地址：" + get_local_ip()
 		start_game_btn.visible = true
 		prepare_btn.visible = false
 	else:
+		ip_lable.visible = false
 		start_game_btn.visible = false
 		prepare_btn.visible = true
 	on_peer_add()

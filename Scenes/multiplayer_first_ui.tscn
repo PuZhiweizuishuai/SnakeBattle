@@ -162,8 +162,10 @@ theme_override_font_sizes/font_size = 50
 text = "说明：点击创建房间，不需要输入房间
 地址，加入房间才需要填写房间地址
 
-因为浏览器环境限制，暂不支持创
-建房间"
+因为浏览器环境限制，暂不支持创建房间
+
+房间号暂时只显示IPv4地址，IPv6地址请
+到系统设置查看"
 
 [node name="CustomDialog" parent="." instance=ExtResource("5_jg5jl")]
 visible = false

@@ -119,9 +119,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -818.0
-offset_top = -435.0
+offset_top = -387.0
 offset_right = 382.0
-offset_bottom = -346.0
+offset_bottom = -298.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 28
@@ -140,9 +140,9 @@ theme_override_constants/separation = 300
 [node name="SkinSelectUI" parent="." instance=ExtResource("5_05fhh")]
 layout_mode = 1
 offset_left = 2.0
-offset_top = 351.0
+offset_top = 399.0
 offset_right = 2.0
-offset_bottom = 351.0
+offset_bottom = 399.0
 
 [node name="SkinLable" parent="SkinSelectUI/SkinContainer" index="0"]
 theme_override_font_sizes/font_size = 60
@@ -204,6 +204,17 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ie3ge")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0h8yj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2ab8e")
 text = "准    备"
+
+[node name="IP" type="Label" parent="."]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 40.0
+offset_right = 382.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lyc84")
+theme_override_font_sizes/font_size = 50
+text = "房间地址："
 
 [connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="CustomDialog/ExitDialog/ConfirmExitBtn" to="." method="_on_confirm_exit_btn_pressed"]

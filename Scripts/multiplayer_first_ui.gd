@@ -52,3 +52,9 @@ func _on_confirm_exit_btn_pressed() -> void:
 
 func _on_cancel_exit_btn_pressed() -> void:
 	dialog.visible = false
+	
+func _exit_tree() -> void:
+	if NetworkGameManager.join_room_success.is_connected(GameManager.load_multiplayer_second_ui):
+		NetworkGameManager.join_room_success.disconnect(GameManager.load_multiplayer_second_ui)
+	if NetworkGameManager.create_server_success.is_connected(GameManager.load_multiplayer_second_ui):
+		NetworkGameManager.create_server_success.disconnect(GameManager.load_multiplayer_second_ui)	
