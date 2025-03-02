@@ -19,6 +19,8 @@ var eat = preload("res://AssetBundle/Audio/Eat.mp3")
 
 var die = preload("res://AssetBundle/Audio/Die.mp3")
 
+var click = preload("res://AssetBundle/Audio/click.wav")
+
 # 显示范围
 const SHOW_RANGE = Vector2(1920, 1080)
 
@@ -67,6 +69,10 @@ func play_die() -> void:
 	audioPlayer.stream = die
 	audioPlayer.play()
 
+
+func play_click() -> void:
+	audioPlayer.stream = click
+	audioPlayer.play()
 
 func add_source(x: int) -> void:
 	source = source + x	

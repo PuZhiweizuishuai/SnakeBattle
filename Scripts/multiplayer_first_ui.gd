@@ -10,6 +10,7 @@ func _ready() -> void:
 
 # 返回上一页
 func _on_back_btn_pressed() -> void:
+	GameManager.play_click()
 	GameManager.load_start_ui()
 
 # 创建房间
@@ -23,7 +24,8 @@ func _on_create_room_btn_pressed() -> void:
 	if nickname.text.length() > 7:
 		dialog_lable.text = "为了显示效果，昵称最大不得\n超过七个字符！"
 		dialog.visible = true
-		return		
+		return
+	GameManager.play_click()
 	NetworkGameManager.create_snake_server(nickname.text)
 
 
@@ -42,15 +44,18 @@ func _on_join_room_btn_pressed() -> void:
 		dialog_lable.text = "房间地址不能为空"
 		dialog.visible = true
 		return
+	GameManager.play_click()
 	NetworkGameManager.connect_pressed(server_host.text, nickname.text)
 
 
 # 消息弹框 确认
 func _on_confirm_exit_btn_pressed() -> void:
+	GameManager.play_click()
 	dialog.visible = false
 
 
 func _on_cancel_exit_btn_pressed() -> void:
+	GameManager.play_click()
 	dialog.visible = false
 	
 func _exit_tree() -> void:

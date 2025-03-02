@@ -13,15 +13,12 @@ extends Control
 func select_skin(index: int) -> void:
 	for i in skin_sprites.size():
 		skin_sprites[i].visible = (i == index)
+	GameManager.play_click()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_blue_snake_button_pressed() -> void:

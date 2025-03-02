@@ -18,12 +18,14 @@ extends Control
 func select_skin(index: int) -> void:
 	for i in skin_sprites.size():
 		skin_sprites[i].visible = (i == index)
+	GameManager.play_click()
 	GameManager.SingleGameSkin = index
 
 # 通用模式选择函数
 func select_mode(index: int) -> void:
 	for i in mode_sprites.size():
 		mode_sprites[i].visible = (i == index)
+	GameManager.play_click()
 	GameManager.SingleGameMode = index
 
 # Called when the node enters the scene tree for the first time.
@@ -32,17 +34,16 @@ func _ready() -> void:
 	select_skin(0)
 	select_mode(0)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 # 返回
 func _on_back_btn_pressed() -> void:
+	GameManager.play_click()
 	GameManager.load_start_ui()
 
 # 开始游戏
 func _on_start_btn_pressed() -> void:
+	GameManager.play_click()
 	GameManager.restart_game()
 
 # 切换自由模式

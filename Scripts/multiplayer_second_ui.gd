@@ -96,11 +96,13 @@ func _on_back_btn_pressed() -> void:
 		# 如果是客户端，则断开连接
 		if multiplayer.multiplayer_peer:
 			multiplayer.multiplayer_peer.close()
+	GameManager.play_click()
 	GameManager.load_multiplayer_first_ui()
 	
 
 
 func _on_confirm_exit_btn_pressed() -> void:
+	GameManager.play_click()
 	if skin_repeat == true:
 		dialog.visible = false
 		return
@@ -109,6 +111,7 @@ func _on_confirm_exit_btn_pressed() -> void:
 
 
 func _on_cancel_exit_btn_pressed() -> void:
+	GameManager.play_click()
 	if skin_repeat == true:
 		dialog.visible = false
 		return
@@ -124,6 +127,7 @@ func _on_start_game_btn_pressed() -> void:
 		dialog.visible = true
 		return
 	skin_repeat = false
+	GameManager.play_click()
 
 
 # 准备游戏
@@ -140,6 +144,7 @@ func _on_prepare_btn_pressed() -> void:
 		prepare_btn.text = "准    备"
 	game_ready_to = !game_ready_to
 	skin_repeat = false
+	GameManager.play_click()
 
 func check_skin() -> bool:
 	var peer_id = multiplayer.get_unique_id()
