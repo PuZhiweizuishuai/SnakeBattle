@@ -10,6 +10,7 @@ var USER_INFO = preload("res://Scenes/multiplayer_user_info.tscn")
 
 # 当前用户是否准备好了
 var game_ready_to = false
+var skin_repeat = false
 
 var _turn := -1
 
@@ -83,24 +84,55 @@ func _on_back_btn_pressed() -> void:
 
 
 func _on_confirm_exit_btn_pressed() -> void:
+	if skin_repeat == true:
+		dialog.visible = false
+		return
 	dialog.visible = false
 	GameManager.load_multiplayer_first_ui()
 
 
 func _on_cancel_exit_btn_pressed() -> void:
+	if skin_repeat == true:
+		dialog.visible = false
+		return
 	dialog.visible = false
 	GameManager.load_multiplayer_first_ui()
 
 
 # 开始游戏
 func _on_start_game_btn_pressed() -> void:
-	pass # Replace with function body.
+	if !check_skin():
+		skin_repeat = true
+		dialog_lable.text = "皮肤不能和已有皮肤重复\n请修改后再开始"
+		dialog.visible = true
+		return
+	skin_repeat = false
 
 
 # 准备游戏
 func _on_prepare_btn_pressed() -> void:
 	if !game_ready_to:
+		# 皮肤旋转判断，不能和已有用户皮肤重复
+		if !check_skin():
+			skin_repeat = true
+			dialog_lable.text = "皮肤不能和已有皮肤重复\n请修改后再准备"
+			dialog.visible = true
+			return
 		prepare_btn.text = "取消准备"
 	else:
 		prepare_btn.text = "准    备"
 	game_ready_to = !game_ready_to
+	skin_repeat = false
+
+func check_skin() -> bool:
+	var peer_id = multiplayer.get_unique_id()
+	var index = 0
+	for player in NetworkGameManager.players:
+		if player.id == peer_id:
+			index = player.skin_index
+	for player in NetworkGameManager.players:
+		if player.id == peer_id:
+			continue
+		if player.skin_index == index:
+			return false
+	return true
