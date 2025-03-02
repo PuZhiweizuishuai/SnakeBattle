@@ -1,0 +1,215 @@
+[gd_scene load_steps=15 format=3 uid="uid://2wu3w6w82jrl"]
+
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_1dkvc"]
+[ext_resource type="Script" path="res://Scripts/multiplayer_second_ui.gd" id="1_nyaa1"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_lyc84"]
+[ext_resource type="PackedScene" uid="uid://bs6f47m7rlvw0" path="res://Scenes/skin_select_ui.tscn" id="5_05fhh"]
+[ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="6_4sike"]
+[ext_resource type="PackedScene" uid="uid://h66suetfy33j" path="res://Scenes/custom_dialog.tscn" id="6_rwf34"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvfwm"]
+bg_color = Color(0.847059, 0.25098, 0.25098, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfccm"]
+bg_color = Color(0.847059, 0.25098, 0.25098, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_er2gg"]
+bg_color = Color(0.847059, 0.25098, 0.25098, 0.588235)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuowp"]
+bg_color = Color(0.847059, 0.25098, 0.25098, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ksvs"]
+bg_color = Color(0.341176, 0.560784, 0.792157, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ie3ge"]
+bg_color = Color(0.341176, 0.560784, 0.792157, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h8yj"]
+bg_color = Color(0.341176, 0.560784, 0.792157, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ab8e"]
+bg_color = Color(0.341176, 0.560784, 0.792157, 0.784314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[node name="MultiplayerSecondUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nyaa1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_1dkvc")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -818.0
+offset_top = -435.0
+offset_right = 382.0
+offset_bottom = -346.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 28
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lyc84")
+theme_override_font_sizes/font_size = 60
+text = "备战"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 300
+
+[node name="SkinSelectUI" parent="." instance=ExtResource("5_05fhh")]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 351.0
+offset_right = 2.0
+offset_bottom = 351.0
+
+[node name="SkinLable" parent="SkinSelectUI/SkinContainer" index="0"]
+theme_override_font_sizes/font_size = 60
+
+[node name="BackBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 38.0
+offset_right = 264.0
+offset_bottom = 238.0
+scale = Vector2(0.2, 0.2)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_4sike")
+
+[node name="CustomDialog" parent="." instance=ExtResource("6_rwf34")]
+visible = false
+layout_mode = 1
+
+[node name="StartGameBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -178.0
+offset_right = -119.0
+offset_bottom = -77.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_lyc84")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_bvfwm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tfccm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_er2gg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_cuowp")
+text = "开始游戏"
+
+[node name="PrepareBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -180.0
+offset_right = -119.0
+offset_bottom = -71.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_lyc84")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_8ksvs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ie3ge")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0h8yj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2ab8e")
+text = "准    备"
+
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="CustomDialog/ExitDialog/ConfirmExitBtn" to="." method="_on_confirm_exit_btn_pressed"]
+[connection signal="pressed" from="CustomDialog/ExitDialog/CancelExitBtn" to="." method="_on_cancel_exit_btn_pressed"]
+[connection signal="pressed" from="StartGameBtn" to="." method="_on_start_game_btn_pressed"]
+[connection signal="pressed" from="PrepareBtn" to="." method="_on_prepare_btn_pressed"]
+
+[editable path="SkinSelectUI"]
+[editable path="CustomDialog"]

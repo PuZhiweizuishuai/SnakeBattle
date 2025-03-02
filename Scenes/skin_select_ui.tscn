@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://bs6f47m7rlvw0"]
+
+[ext_resource type="Theme" uid="uid://b8y42dk6oe3va" path="res://Themes/start_theme.tres" id="1_wrqm0"]
+[ext_resource type="Script" path="res://Scripts/skin_select_ui.gd" id="2_2b5di"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_y1icy"]
+[ext_resource type="Texture2D" uid="uid://dnexfymnnjg2v" path="res://AssetBundle/Sprites/Snak/sh00.png" id="3_6aqsa"]
+[ext_resource type="Texture2D" uid="uid://b67spuhtb2nb" path="res://AssetBundle/Sprites/Snak/sh01.png" id="4_kl6fg"]
+[ext_resource type="Texture2D" uid="uid://cpi2vkdhap0ym" path="res://AssetBundle/Sprites/Snak/sh02.png" id="5_y1hqe"]
+[ext_resource type="Texture2D" uid="uid://dw7rd0s7j0b1c" path="res://AssetBundle/Sprites/Snak/sh03.png" id="6_wowjr"]
+
+[node name="SkinSelectUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wrqm0")
+script = ExtResource("2_2b5di")
+
+[node name="SkinContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -811.0
+offset_top = -386.0
+offset_right = 812.0
+offset_bottom = -170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="SkinLable" type="Label" parent="SkinContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.133333, 0.156863, 0.192157, 1)
+theme_override_fonts/font = ExtResource("2_y1icy")
+theme_override_font_sizes/font_size = 80
+text = "皮肤"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SkinContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="BlueSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "蓝色"
+
+[node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/BlueSnakeButton"]
+position = Vector2(-23.5, 46)
+texture = ExtResource("3_6aqsa")
+
+[node name="YellowSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "黄色"
+
+[node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/YellowSnakeButton"]
+visible = false
+position = Vector2(-18.5, 46)
+texture = ExtResource("4_kl6fg")
+
+[node name="GirlSnakeButton" type="Button" parent="SkinContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "卡通"
+
+[node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/GirlSnakeButton"]
+visible = false
+position = Vector2(-18.5, 46)
+texture = ExtResource("5_y1hqe")
+
+[node name="ChouxiangSnakeButton2" type="Button" parent="SkinContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "抽象"
+
+[node name="Sprite2D" type="Sprite2D" parent="SkinContainer/HBoxContainer/ChouxiangSnakeButton2"]
+visible = false
+position = Vector2(-18.5, 46)
+texture = ExtResource("6_wowjr")
+
+[connection signal="pressed" from="SkinContainer/HBoxContainer/BlueSnakeButton" to="." method="_on_blue_snake_button_pressed"]
+[connection signal="pressed" from="SkinContainer/HBoxContainer/YellowSnakeButton" to="." method="_on_yellow_snake_button_pressed"]
+[connection signal="pressed" from="SkinContainer/HBoxContainer/GirlSnakeButton" to="." method="_on_girl_snake_button_pressed"]
+[connection signal="pressed" from="SkinContainer/HBoxContainer/ChouxiangSnakeButton2" to="." method="_on_chouxiang_snake_button_2_pressed"]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://q28g027grjlf"]
+
+[ext_resource type="Script" path="res://Scripts/multiplayer_user_info.gd" id="1_c0ib2"]
+[ext_resource type="Texture2D" uid="uid://dnexfymnnjg2v" path="res://AssetBundle/Sprites/Snak/sh00.png" id="1_ckllc"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_w2wca"]
+
+[node name="MultiplayerUserInfo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c0ib2")
+
+[node name="Head" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="TextureRect" type="TextureRect" parent="Head"]
+layout_mode = 2
+texture = ExtResource("1_ckllc")
+
+[node name="Nickname" type="Label" parent="."]
+layout_mode = 0
+offset_left = -50.0
+offset_top = 219.0
+offset_right = 250.0
+offset_bottom = 319.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_w2wca")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1

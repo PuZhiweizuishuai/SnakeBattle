@@ -5,6 +5,9 @@ var source = 0
 
 # 玩家吃到苹果
 signal apple_eaten 
+# 皮肤切换
+signal skin_change(index: int)
+
 
 var audioBgmPlayer
 
@@ -91,3 +94,6 @@ func load_start_ui():
 # 加载多人模式
 func load_multiplayer_first_ui():
 	get_tree().change_scene_to_file("res://Scenes/multiplayer_first_ui.tscn")
+	
+func load_multiplayer_second_ui():
+	get_tree().change_scene_to_file("res://Scenes/multiplayer_second_ui.tscn")

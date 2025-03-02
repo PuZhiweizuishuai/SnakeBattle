@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://h66suetfy33j"]
+
+[ext_resource type="Texture2D" uid="uid://cmfglgc0uj207" path="res://AssetBundle/Sprites/Background/shadow.png" id="1_xirvf"]
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="2_rob5d"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="3_ekpac"]
+
+[node name="CustomDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExitDialog" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="ExitDialog"]
+layout_mode = 0
+offset_left = -399.0
+offset_top = -239.0
+offset_right = 881.0
+offset_bottom = 481.0
+scale = Vector2(0.675, 0.68)
+texture = ExtResource("1_xirvf")
+
+[node name="TextureRect" type="TextureRect" parent="ExitDialog"]
+modulate = Color(0.819608, 0.913725, 0.964706, 1)
+layout_mode = 0
+offset_left = -393.0
+offset_top = -232.0
+offset_right = 1527.0
+offset_bottom = 848.0
+scale = Vector2(0.439999, 0.439999)
+texture = ExtResource("2_rob5d")
+
+[node name="Label" type="Label" parent="ExitDialog"]
+layout_mode = 0
+offset_left = -303.0
+offset_top = -165.0
+offset_right = 397.0
+offset_bottom = -64.0
+theme_override_colors/font_color = Color(0.133333, 0.156863, 0.192157, 1)
+theme_override_fonts/font = ExtResource("3_ekpac")
+theme_override_font_sizes/font_size = 50
+text = "确认要退出吗？"
+
+[node name="ConfirmExitBtn" type="Button" parent="ExitDialog"]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 104.0
+offset_right = 343.0
+offset_bottom = 201.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_ekpac")
+theme_override_font_sizes/font_size = 40
+text = "确认"
+
+[node name="CancelExitBtn" type="Button" parent="ExitDialog"]
+layout_mode = 0
+offset_left = -270.0
+offset_top = 104.0
+offset_right = -94.0
+offset_bottom = 201.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_ekpac")
+theme_override_font_sizes/font_size = 40
+text = "取消"
