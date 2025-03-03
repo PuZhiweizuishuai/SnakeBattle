@@ -216,6 +216,21 @@ theme_override_fonts/font = ExtResource("2_lyc84")
 theme_override_font_sizes/font_size = 50
 text = "房间地址："
 
+[node name="Log" type="Tree" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -204.0
+offset_right = 500.0
+offset_bottom = -4.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_lyc84")
+theme_override_fonts/title_button_font = ExtResource("2_lyc84")
+theme_override_font_sizes/font_size = 30
+hide_folding = true
+
 [connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="CustomDialog/ExitDialog/ConfirmExitBtn" to="." method="_on_confirm_exit_btn_pressed"]
 [connection signal="pressed" from="CustomDialog/ExitDialog/CancelExitBtn" to="." method="_on_cancel_exit_btn_pressed"]

@@ -5,7 +5,8 @@ extends Control
 @onready var dialog_lable = $CustomDialog/ExitDialog/Label
 @onready var dialog = $CustomDialog
 func _ready() -> void:
-	NetworkGameManager.join_room_success.connect(GameManager.load_multiplayer_second_ui)
+	# 使用lambda函数忽略信号参数
+	NetworkGameManager.join_room_success.connect(func(_player_name): GameManager.load_multiplayer_second_ui())
 	NetworkGameManager.create_server_success.connect(GameManager.load_multiplayer_second_ui)
 
 # 返回上一页
@@ -59,7 +60,8 @@ func _on_cancel_exit_btn_pressed() -> void:
 	dialog.visible = false
 	
 func _exit_tree() -> void:
-	if NetworkGameManager.join_room_success.is_connected(GameManager.load_multiplayer_second_ui):
-		NetworkGameManager.join_room_success.disconnect(GameManager.load_multiplayer_second_ui)
+	# 断开所有信号连接
+	for connection in NetworkGameManager.join_room_success.get_connections():
+		NetworkGameManager.join_room_success.disconnect(connection["callable"])
 	if NetworkGameManager.create_server_success.is_connected(GameManager.load_multiplayer_second_ui):
 		NetworkGameManager.create_server_success.disconnect(GameManager.load_multiplayer_second_ui)	

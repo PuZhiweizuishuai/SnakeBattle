@@ -8,6 +8,7 @@ var USER_INFO = preload("res://Scenes/multiplayer_user_info.tscn")
 @onready var start_game_btn = $StartGameBtn
 @onready var prepare_btn = $PrepareBtn
 @onready var ip_lable = $IP
+@onready var log = $Log
 
 # 当前用户是否准备好了
 var game_ready_to = false
@@ -36,18 +37,37 @@ func _ready() -> void:
 	NetworkGameManager.players_updated.connect(on_peer_add)
 	# 服务器关闭事件监听
 	NetworkGameManager.server_closed.connect(_on_server_closed)
+	# 玩家加入退出事件监听
+	NetworkGameManager.join_room_success.connect(_on_player_joined)
+	NetworkGameManager.player_left.connect(_on_player_left)
+	# 初始化日志树
+	log.create_item() # 创建根节点
 	# 根据是否是服务器来显示对应按钮
 	if multiplayer.is_server():
 		# 获取本地所有IP地址,只有房主才显示
 		ip_lable.text = "房间地址：" + get_local_ip()
 		start_game_btn.visible = true
 		prepare_btn.visible = false
+		# 如果是服务器，记录自己加入房间
+		add_log("用户 " + NetworkGameManager.players[0].name + " 创建了房间")
 	else:
 		ip_lable.visible = false
 		start_game_btn.visible = false
 		prepare_btn.visible = true
 	on_peer_add()
 
+# 添加日志记录
+func add_log(message: String) -> void:
+	var current_time = Time.get_datetime_dict_from_system()
+	var time_str = "%02d:%02d:%02d" % [current_time.hour, current_time.minute, current_time.second]
+	var log_message = message + " - " + time_str
+	
+	var root = log.get_root()
+	var item = log.create_item(root)
+	item.set_text(0, log_message)
+	
+	# 自动滚动到最新的日志
+	log.scroll_to_item(item)
 
 # 清除所有用户视图
 func _clear_user_views() -> void:
@@ -63,6 +83,7 @@ func on_peer_add() -> void:
 		show_user_view.add_child(info_view)
 		info_view.change_name(user.name)
 		info_view.change_head(user.skin_index)
+		info_view.change_ready(user.is_ready)
 
 func _on_skin_change(index: int):
 	# 当本地玩家更改皮肤时，通知服务器更新信息
@@ -145,6 +166,17 @@ func _on_prepare_btn_pressed() -> void:
 	game_ready_to = !game_ready_to
 	skin_repeat = false
 	GameManager.play_click()
+	# 同步准备状态到服务器
+	var peer_id = multiplayer.get_unique_id()
+	var ready_status = 1 if game_ready_to else 0
+	
+	# add_log("用户 " + player_name + " 已加入")
+	if multiplayer.is_server():
+		NetworkGameManager.update_player_ready.call(peer_id, ready_status)
+	else:
+		NetworkGameManager.update_player_ready.rpc(peer_id, ready_status)
+	
+
 
 func check_skin() -> bool:
 	var peer_id = multiplayer.get_unique_id()
@@ -158,3 +190,11 @@ func check_skin() -> bool:
 		if player.skin_index == index:
 			return false
 	return true
+
+# 处理玩家加入事件
+func _on_player_joined(player_name: String) -> void:
+	add_log("用户 " + player_name + " 已加入")
+
+# 处理玩家退出事件
+func _on_player_left(player_name: String) -> void:
+	add_log("用户 " + player_name + " 已退出")
