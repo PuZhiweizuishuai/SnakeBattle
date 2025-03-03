@@ -12,7 +12,7 @@ const DEFAULT_SERVER_IP = "127.0.0.1"
 var peer := WebSocketMultiplayerPeer.new()
 
 # 存储用户列表
-var players = []
+var players: Array = []
 
 # 服务器创建成功触发
 signal create_server_success
@@ -31,12 +31,22 @@ func _init() -> void:
 	# 设置支持的协议列表
 	peer.supported_protocols = [PROTO_NAME]  
 
-func create_snake_server(name: String):
-	multiplayer.multiplayer_peer = null
-	# 创建服务器
-	var err = peer.create_server(PORT)
-	# 服务器创建失败
-	if err != OK:
+func _ready() -> void:
+	_connect_multiplayer_signals()
+
+# 信号连接
+func _connect_multiplayer_signals() -> void:
+	multiplayer.peer_connected.connect(_peer_connected)
+	multiplayer.peer_disconnected.connect(_peer_disconnected)
+	multiplayer.server_disconnected.connect(_close_network)
+	multiplayer.connection_failed.connect(_close_network)
+	multiplayer.connected_to_server.connect(_connected)
+
+# 服务器管理
+func create_snake_server(name: String) -> void:
+	_reset_network_state()
+	
+	if peer.create_server(PORT) != OK:
 		print("服务器创建失败！")
 		return
 					 
@@ -50,24 +60,17 @@ func create_snake_server(name: String):
 
 # 点击"加入房间"按钮
 func connect_pressed(host_text: String, nickname: String) -> void:
-	multiplayer.multiplayer_peer = null
+	_reset_network_state()
 	# 创建客户端连接（WebSocket地址格式）
 	# 保存玩家名称，供后续使用
 	_pending_player_name = nickname
 	peer.create_client("ws://" + host_text + ":" + str(PORT))
 	multiplayer.multiplayer_peer = peer
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	# 连接多玩家信号
-	# 新玩家加入
-	multiplayer.peer_connected.connect(_peer_connected)
-	# 玩家离开
-	multiplayer.peer_disconnected.connect(_peer_disconnected)
-	
-	multiplayer.server_disconnected.connect(_close_network)
-	multiplayer.connection_failed.connect(_close_network)
-	multiplayer.connected_to_server.connect(_connected)
+# 网络状态重置
+func _reset_network_state() -> void:
+	multiplayer.multiplayer_peer = null
+	players.clear()
 
 # 成功连接到服务器时的回调
 func _connected() -> void:
@@ -92,19 +95,14 @@ func _peer_connected(id: int) -> void:
 
 # 对等体断开时的回调
 func _peer_disconnected(id: int) -> void:
-	# 从玩家列表中移除离开的玩家
-	var player_name = ""
-	for i in range(players.size() - 1, -1, -1):
-		if players[i].id == id:
-			player_name = players[i].name
-			players.remove_at(i)
-			break
+	var player_name = _remove_player(id)
+	if player_name.is_empty():
+		return
 	
-	if player_name != "":
-		if multiplayer.is_server():
-			# 服务器广播给所有客户端
-			notify_player_left.rpc(player_name)
-		player_left.emit(player_name)
+	if multiplayer.is_server():
+		# 服务器广播给所有客户端
+		notify_player_left.rpc(player_name)
+	player_left.emit(player_name)
 	
 	# 触发玩家列表更新信号
 	players_updated.emit()
@@ -125,12 +123,8 @@ func _close_network() -> void:
 # 更新玩家信息
 @rpc("any_peer")
 func update_player_info(id: int, new_name: String, skin_index: int) -> void:
-	# 更新本地玩家信息
-	for player in players:
-		if player.id == id:
-			player.name = new_name
-			player.skin_index = skin_index
-			break
+	_update_player_property(id, "name", new_name)
+	_update_player_property(id, "skin_index", skin_index)
 	
 	if multiplayer.is_server():
 		# 服务器广播给所有客户端
@@ -142,11 +136,7 @@ func update_player_info(id: int, new_name: String, skin_index: int) -> void:
 # 更新玩家准备状态
 @rpc("any_peer")
 func update_player_ready(id: int, is_ready: int) -> void:
-	# 更新本地玩家信息
-	for player in players:
-		if player.id == id:
-			player.is_ready = is_ready
-			break
+	_update_player_property(id, "is_ready", is_ready)
 	
 	if multiplayer.is_server():
 		# 服务器广播给所有客户端
@@ -187,14 +177,8 @@ func request_set_player_name(id: int, new_name: String) -> void:
 	if not multiplayer.is_server():
 		return
 	# 更新玩家名称
-	for player in players:
-		if player.id == id:
-			player.name = new_name
-			# 广播给所有客户端有新玩家加入
-			notify_new_player.rpc(new_name)
-			# 服务器端也触发玩家加入信号
-			join_room_success.emit(new_name)
-			break
+	_update_player_property(id, "name", new_name)
+	notify_new_player.rpc(new_name)
 	
 	# 广播更新后的玩家列表
 	for peer_id in multiplayer.get_peers():
@@ -210,3 +194,18 @@ func notify_new_player(player_name: String) -> void:
 @rpc
 func notify_player_left(player_name: String) -> void:
 	player_left.emit(player_name)
+
+# 辅助函数
+func _update_player_property(id: int, property: String, value) -> void:
+	for player in players:
+		if player.id == id:
+			player.set(property, value)
+			break
+
+func _remove_player(id: int) -> String:
+	for i in range(players.size() - 1, -1, -1):
+		if players[i].id == id:
+			var name = players[i].name
+			players.remove_at(i)
+			return name
+	return ""
