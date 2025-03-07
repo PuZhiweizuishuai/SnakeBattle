@@ -13,6 +13,8 @@ var peer := WebSocketMultiplayerPeer.new()
 
 # 存储用户列表
 var players: Array = []
+# 蛇的数据，键值对 key 为 peer_id， value 为 SnakeInfoData
+var snakeInfoMap = {}
 
 # 服务器创建成功触发
 signal create_server_success
@@ -24,6 +26,11 @@ signal join_room_success(player_name: String)
 signal server_closed
 # 玩家退出信号
 signal player_left(player_name: String)
+# 游戏开始信号
+signal start_game
+# 吃到食物
+signal eat_food
+
 # 存储用户设定的昵称
 var _pending_player_name: String = ""
 
@@ -157,6 +164,12 @@ func _get_players_data() -> Array:
 		})
 	return data
 
+func get_user_name(id: int) -> String:
+	for player in players:
+		if player.id == id:
+			return player.name
+	return ""
+
 # 同步玩家信息
 @rpc
 func sync_players_info(players_data: Array) -> void:
@@ -209,3 +222,91 @@ func _remove_player(id: int) -> String:
 			players.remove_at(i)
 			return name
 	return ""
+
+# 开始游戏
+@rpc
+func start_multiplayer_game() -> void:
+	# 发送开始游戏信号
+	start_game.emit()
+	
+# 服务器端生成蛇头部位置，之后同步到各个客户端
+func snake_head_initial_position():
+	if not multiplayer.is_server():
+		return
+	var positions_data = {}	
+	for player in players:
+		var snakeInfo = SnakeInfoData.new()
+		# 随机初始位置
+		snakeInfo.random_position()
+		# 随机初始方向
+		var directions = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
+		snakeInfo.direction = directions[randi() % directions.size()]
+		
+		# 只传输位置数据和方向
+		positions_data[str(player.id)] = {
+			"position": snakeInfo.init_position,
+			"direction": snakeInfo.direction
+		}
+		snakeInfoMap[str(player.id)] = snakeInfo
+	
+	# 同步位置到所有客户端
+	sync_initial_positions.rpc(positions_data)
+
+# 同步初始位置
+@rpc("reliable")
+func sync_initial_positions(positions: Dictionary):
+	snakeInfoMap.clear()
+	# 接收到位置数据后，创建新的SnakeInfoData对象
+	for player_id in positions:
+		var snakeInfo = SnakeInfoData.new()
+		snakeInfo.init_position = positions[player_id]["position"]
+		snakeInfo.direction = positions[player_id]["direction"]
+		snakeInfoMap[player_id] = snakeInfo
+
+# 服务器生成食物并同步到客户端
+@rpc("reliable", "call_local")
+func spawn_network_food(food_position: Vector2):
+	# 这个函数会在服务器和所有客户端上执行
+	eat_food.emit(food_position)
+
+
+# 通知服务器食物被吃掉
+@rpc("reliable", "any_peer")
+func notify_food_eaten(food_path: NodePath):
+	if not multiplayer.is_server():
+		return
+		
+	# 服务器处理食物被吃的逻辑
+	var food = get_node_or_null(food_path)
+	if food:
+		# 获取吃食物的玩家ID
+		var player_id = multiplayer.get_remote_sender_id()
+		var player_name = get_user_name(player_id)
+		print("玩家 ", player_name, " 吃到了食物")
+		
+		# 通知所有客户端删除这个食物
+		remove_food.rpc(food_path)
+		
+		# 生成新食物
+		var new_food_pos = Vector2(
+			randf_range(50, GameManager.SHOW_RANGE.x - 50),
+			randf_range(50, GameManager.SHOW_RANGE.y - 50)
+		)
+		
+		# 同步新食物到所有客户端
+		spawn_network_food.rpc(new_food_pos)
+
+# 新增：通知所有客户端删除食物
+@rpc("reliable")
+func remove_food(food_path: NodePath):
+	var food = get_node_or_null(food_path)
+	if food:
+		food.queue_free()
+
+# 通知所有客户端某个玩家的蛇增长了
+@rpc("reliable")
+func snake_grow(player_id: int):
+	# 找到对应的蛇头并调用grow方法
+	var snake_head = get_tree().get_root().find_child(str(player_id), true, false)
+	if snake_head:
+		snake_head.grow_from_server()

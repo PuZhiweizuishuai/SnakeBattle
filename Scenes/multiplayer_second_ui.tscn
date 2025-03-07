@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://2wu3w6w82jrl"]
 
 [ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_1dkvc"]
-[ext_resource type="Script" path="res://Scripts/multiplayer_second_ui.gd" id="1_nyaa1"]
+[ext_resource type="Script" uid="uid://c0ptm8g1q7qpr" path="res://Scripts/multiplayer_second_ui.gd" id="1_nyaa1"]
 [ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_lyc84"]
 [ext_resource type="PackedScene" uid="uid://bs6f47m7rlvw0" path="res://Scenes/skin_select_ui.tscn" id="5_05fhh"]
 [ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="6_4sike"]

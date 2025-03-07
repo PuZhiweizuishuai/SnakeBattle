@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://b8y42dk6oe3va" path="res://Themes/start_theme.tres" id="1_41ynx"]
 [ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_bewt2"]
 [ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="1_xsr5r"]
-[ext_resource type="Script" path="res://Scripts/start_ui.gd" id="2_3oisg"]
+[ext_resource type="Script" uid="uid://hw6qfcc45xlq" path="res://Scripts/start_ui.gd" id="2_3oisg"]
 [ext_resource type="Texture2D" uid="uid://bkuiarprguvvn" path="res://AssetBundle/Sprites/Food/icecream-01.png" id="5_f0wrg"]
 [ext_resource type="Texture2D" uid="uid://wbltuswb64qe" path="res://AssetBundle/Sprites/Food/icecream-02.png" id="6_hu487"]
 [ext_resource type="Texture2D" uid="uid://dvk71c3kb6dwf" path="res://AssetBundle/Sprites/Food/icecream-03.png" id="7_cw4aj"]
@@ -49,8 +49,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mkbe0"]
 _data = {
-"RESET": SubResource("Animation_0bqel"),
-"start_menu_admission": SubResource("Animation_8qg8x")
+&"RESET": SubResource("Animation_0bqel"),
+&"start_menu_admission": SubResource("Animation_8qg8x")
 }
 
 [sub_resource type="Animation" id="Animation_ixs3v"]
@@ -86,8 +86,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cpflu"]
 _data = {
-"RESET": SubResource("Animation_ixs3v"),
-"show_exit_dialog_animation": SubResource("Animation_km8bc")
+&"RESET": SubResource("Animation_ixs3v"),
+&"show_exit_dialog_animation": SubResource("Animation_km8bc")
 }
 
 [node name="StartUI" type="Control"]

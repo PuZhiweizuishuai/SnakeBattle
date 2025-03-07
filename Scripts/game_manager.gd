@@ -103,3 +103,6 @@ func load_multiplayer_first_ui():
 	
 func load_multiplayer_second_ui():
 	get_tree().change_scene_to_file("res://Scenes/multiplayer_second_ui.tscn")
+
+func load_multiplayer_game():
+	get_tree().change_scene_to_file("res://Scenes/multiplayer_game.tscn")

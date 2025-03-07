@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://q28g027grjlf"]
 
-[ext_resource type="Script" path="res://Scripts/multiplayer_user_info.gd" id="1_c0ib2"]
+[ext_resource type="Script" uid="uid://dhs81kokd7i5x" path="res://Scripts/multiplayer_user_info.gd" id="1_c0ib2"]
 [ext_resource type="Texture2D" uid="uid://dnexfymnnjg2v" path="res://AssetBundle/Sprites/Snak/sh00.png" id="1_ckllc"]
 [ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_w2wca"]
 

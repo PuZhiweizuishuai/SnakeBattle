@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_nlnhk"]
 [ext_resource type="Theme" uid="uid://b8y42dk6oe3va" path="res://Themes/start_theme.tres" id="1_xuxyk"]
-[ext_resource type="Script" path="res://Scripts/single_game_ui.gd" id="2_pbs3q"]
+[ext_resource type="Script" uid="uid://cl6507necwnlq" path="res://Scripts/single_game_ui.gd" id="2_pbs3q"]
 [ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_qanid"]
 [ext_resource type="Texture2D" uid="uid://dnexfymnnjg2v" path="res://AssetBundle/Sprites/Snak/sh00.png" id="3_xhklr"]
 [ext_resource type="Texture2D" uid="uid://b67spuhtb2nb" path="res://AssetBundle/Sprites/Snak/sh01.png" id="5_cgffx"]

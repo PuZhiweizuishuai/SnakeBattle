@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://xhkh3sia8ov5"]
 
-[ext_resource type="Script" path="res://Scripts/lose_scene.gd" id="1_bps60"]
+[ext_resource type="Script" uid="uid://bl6k3t1jre1od" path="res://Scripts/lose_scene.gd" id="1_bps60"]
 [ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_ex371"]
 
 [node name="LoseScene" type="Control"]

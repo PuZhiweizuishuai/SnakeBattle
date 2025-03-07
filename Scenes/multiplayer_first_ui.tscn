@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bwfdiuwb3e23n"]
 
-[ext_resource type="Script" path="res://Scripts/multiplayer_first_ui.gd" id="1_0diom"]
+[ext_resource type="Script" uid="uid://h0p8d5j0kptn" path="res://Scripts/multiplayer_first_ui.gd" id="1_0diom"]
 [ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_4cbis"]
 [ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="2_klaj4"]
 [ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="3_1ij72"]
@@ -128,6 +128,7 @@ placeholder_text = "请输入你的昵称"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_1ij72")
 theme_override_font_sizes/font_size = 100
+text = "127.0.0.1"
 placeholder_text = "房间地址"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]

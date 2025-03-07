@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1uau6ssf5lks"]
 
-[ext_resource type="Script" path="res://Scripts/multiplayer_game.gd" id="1_wgmmn"]
+[ext_resource type="Script" uid="uid://cgmyod2g3368f" path="res://Scripts/multiplayer_game.gd" id="1_wgmmn"]
 [ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_ygxjs"]
 
 [node name="MultiplayerGame" type="Node2D"]
@@ -10,3 +10,7 @@ script = ExtResource("1_wgmmn")
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_ygxjs")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Foods" type="Node2D" parent="."]

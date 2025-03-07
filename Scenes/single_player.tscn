@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cft6qfvqg8g54"]
 
-[ext_resource type="Script" path="res://Scripts/single_player.gd" id="1_g7y1d"]
+[ext_resource type="Script" uid="uid://bbgajws3yuwc8" path="res://Scripts/single_player.gd" id="1_g7y1d"]
 [ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="2_tennv"]
 [ext_resource type="PackedScene" uid="uid://dsdgs2b71fxmk" path="res://Scenes/head.tscn" id="3_o7i7o"]
-[ext_resource type="Script" path="res://Scripts/food_spawner.gd" id="4_0nwdx"]
+[ext_resource type="Script" uid="uid://b04fblpte7uij" path="res://Scripts/food_spawner.gd" id="4_0nwdx"]
 [ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="5_dcxbs"]
 [ext_resource type="PackedScene" uid="uid://n41lbgr160k4" path="res://Scenes/virtual_joystick.tscn" id="5_nq35i"]
 [ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="6_jf4f1"]

@@ -29,6 +29,8 @@ func _init_signals() -> void:
 	NetworkGameManager.server_closed.connect(_on_server_closed)
 	NetworkGameManager.join_room_success.connect(_on_player_joined)
 	NetworkGameManager.player_left.connect(_on_player_left)
+	# 开始游戏信号
+	NetworkGameManager.start_game.connect(_on_start_game)
 
 # 日志初始化
 func _init_log() -> void:
@@ -109,7 +111,7 @@ func _get_player_name(peer_id: int) -> String:
 			return player.name
 	return ""
 
-# 检查皮肤是否重复
+# 检查皮肤和准备状态是否重复
 func check_skin() -> bool:
 	var peer_id = multiplayer.get_unique_id()
 	var current_skin_index = _get_player_skin_index(peer_id)
@@ -117,6 +119,10 @@ func check_skin() -> bool:
 	for player in NetworkGameManager.players:
 		if player.id != peer_id && player.skin_index == current_skin_index:
 			return false
+		# 准备状态判断	
+		if multiplayer.is_server():
+			if player.id != peer_id && player.is_ready == 0:
+				return false
 	return true
 
 # 获取玩家皮肤索引
@@ -154,12 +160,29 @@ func _on_cancel_exit_btn_pressed() -> void:
 	if !skin_repeat:
 		GameManager.load_multiplayer_first_ui()
 
+# 开始游戏
 func _on_start_game_btn_pressed() -> void:
+	GameManager.play_click()
+	# 判断皮肤是否重复与玩家是否准备
 	if !check_skin():
 		_show_skin_repeat_dialog()
 		return
 	skin_repeat = false
-	GameManager.play_click()
+	# 界面跳转，跳转到多人游戏界面
+	# 服务器通知所有客户端开始游戏
+	# TODO 延时三秒执行	
+	# 初始化头部位置
+	NetworkGameManager.snake_head_initial_position()
+	# 等待位置同步完成后再添加玩家
+	await get_tree().create_timer(3).timeout
+	if multiplayer.is_server():
+		NetworkGameManager.start_multiplayer_game.rpc()	
+	# 加载多人游戏场景
+	GameManager.load_multiplayer_game()
+
+func _on_start_game():
+	GameManager.load_multiplayer_game()	
+	
 
 func _on_prepare_btn_pressed() -> void:
 	if !game_ready_to && !check_skin():
@@ -175,7 +198,7 @@ func _on_prepare_btn_pressed() -> void:
 
 func _show_skin_repeat_dialog() -> void:
 	skin_repeat = true
-	dialog_lable.text = "皮肤不能和已有皮肤重复\n请修改后再" + ("开始" if multiplayer.is_server() else "准备")
+	dialog_lable.text = "皮肤不能和已有皮肤重复\n或者有玩家未准备\n请修改后再" + ("开始" if multiplayer.is_server() else "准备")
 	dialog.visible = true
 
 func _toggle_prepare_status() -> void:

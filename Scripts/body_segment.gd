@@ -16,6 +16,9 @@ func _ready():
 	add_to_group("body")
 	$CollisionShape2D.disabled = false 
 
+func set_skin(skin_index):
+	body.texture = load("res://AssetBundle/Sprites/Snak/sb0"+ str(skin_index) +".png")
+
 
 func is_head() -> bool:
 	return prev_body == null
