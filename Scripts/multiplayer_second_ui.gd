@@ -7,7 +7,7 @@ extends Control
 @onready var start_game_btn = $StartGameBtn
 @onready var prepare_btn = $PrepareBtn
 @onready var ip_lable = $IP
-@onready var log = $Log
+@onready var show_log = $Log
 
 # 常量
 const USER_INFO = preload("res://Scenes/multiplayer_user_info.tscn")
@@ -34,7 +34,7 @@ func _init_signals() -> void:
 
 # 日志初始化
 func _init_log() -> void:
-	log.create_item()
+	show_log.create_item()
 	if multiplayer.is_server():
 		add_log("用户 " + NetworkGameManager.players[0].name + " 创建了房间")
 
@@ -66,10 +66,10 @@ func _is_valid_ipv4(address: String) -> bool:
 func add_log(message: String) -> void:
 	var time_str = _get_current_time()
 	var log_message = message + " - " + time_str
-	var root = log.get_root()
-	var item = log.create_item(root)
+	var root = show_log.get_root()
+	var item = show_log.create_item(root)
 	item.set_text(0, log_message)
-	log.scroll_to_item(item)
+	show_log.scroll_to_item(item)
 
 # 获取当前时间字符串
 func _get_current_time() -> String:
