@@ -169,9 +169,9 @@ func _on_area_entered(area):
 	# 碰撞检测（当碰到食物时）
 	if area.is_in_group("food"):
 		# 通知服务器食物被吃
-		NetworkGameManager.notify_food_eaten.rpc_id(1, area.get_path())
+		NetworkGameManager.notify_food_eaten.rpc_id(1, area.position)
 		# 本地先增长一次，提供即时反馈
-		grow()
+		call_deferred("grow")
 	elif area.is_in_group("body"):
 		# 需要判断这个身体段是否属于自己
 		# 获取身体段的所有者ID

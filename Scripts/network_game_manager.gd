@@ -269,44 +269,49 @@ func spawn_network_food(food_position: Vector2):
 	# 这个函数会在服务器和所有客户端上执行
 	eat_food.emit(food_position)
 
-
 # 通知服务器食物被吃掉
 @rpc("reliable", "any_peer", "call_local")
-func notify_food_eaten(food_path: NodePath):
+func notify_food_eaten(food_position: Vector2):
 	if not multiplayer.is_server():
 		return
 		
-	# 服务器处理食物被吃的逻辑
-	var food = get_node_or_null(food_path)
-	if food:
-		# 获取吃食物的玩家ID
-		var player_id = multiplayer.get_remote_sender_id()
-		if player_id == 0:  # 如果是服务器自己吃的
-			player_id = 1
-		var player_name = get_user_name(player_id)
-		print("玩家 ", player_name, " 吃到了食物")
-		
-		# 通知所有客户端删除这个食物
-		remove_food.rpc(food_path)
-		
-		# 通知所有客户端让对应玩家的蛇增长
-		snake_grow.rpc(player_id)
-		
-		# 生成新食物
-		var new_food_pos = Vector2(
-			randf_range(50, GameManager.SHOW_RANGE.x - 50),
-			randf_range(50, GameManager.SHOW_RANGE.y - 50)
-		)
-		
-		# 同步新食物到所有客户端
-		spawn_network_food.rpc(new_food_pos)
+	# 获取吃食物的玩家ID
+	var player_id = multiplayer.get_remote_sender_id()
+	if player_id == 0:  # 如果是服务器自己吃的
+		player_id = 1
+	var player_name = get_user_name(player_id)
+	print("玩家 ", player_name, " 吃到了食物")
+	
+	# 通知所有客户端删除这个食物
+	remove_food.rpc(food_position)
+	
+	# 通知所有客户端让对应玩家的蛇增长
+	snake_grow.rpc(player_id)
+	
+	# 延迟生成新食物
+	call_deferred("_spawn_new_food")
+
+# 延迟生成新食物
+func _spawn_new_food():
+	# 生成新食物
+	var new_food_pos = Vector2(
+		randf_range(50, GameManager.SHOW_RANGE.x - 50),
+		randf_range(50, GameManager.SHOW_RANGE.y - 50)
+	)
+	
+	# 同步新食物到所有客户端
+	spawn_network_food.rpc(new_food_pos)
 
 # 新增：通知所有客户端删除食物
 @rpc("reliable", "call_local")
-func remove_food(food_path: NodePath):
-	var food = get_node_or_null(food_path)
-	if food:
-		food.queue_free()
+func remove_food(food_position: Vector2):
+	# 找到对应位置的食物并删除
+	var foods = get_tree().get_root().find_child("Foods", true, false)
+	if foods:
+		for food in foods.get_children():
+			if food.position.distance_to(food_position) < 1.0:  # 使用一个小的阈值来判断是否是同一个位置
+				food.queue_free()
+				break
 
 # 通知所有客户端某个玩家的蛇增长了
 @rpc("reliable", "call_local")
@@ -314,4 +319,4 @@ func snake_grow(player_id: int):
 	# 找到对应的蛇头并调用grow方法
 	var snake_head = get_tree().get_root().find_child(str(player_id), true, false)
 	if snake_head:
-		snake_head.grow_from_server()
+		snake_head.call_deferred("grow_from_server")

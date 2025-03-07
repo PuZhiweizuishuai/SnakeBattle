@@ -12,7 +12,7 @@ func _ready():
 	
 	# 如果是服务器，生成初始食物
 	if multiplayer.is_server():
-		spawn_initial_food()
+		call_deferred("spawn_initial_food")
 
 func add_player(id: int, skin: int) -> void:
 	var head = HEAD.instantiate()
@@ -43,4 +43,8 @@ func spawn_initial_food():
 func spawn_food(food_position: Vector2):
 	var food = FOOD.instantiate()
 	food.position = food_position
+	call_deferred("_add_food", food)
+
+# 延迟添加食物
+func _add_food(food: Node):
 	$Foods.add_child(food)
