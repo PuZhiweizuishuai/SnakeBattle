@@ -21,7 +21,7 @@ var viewport_size = null
 var is_local_player = false       # 是否为本地玩家
 var player_id = 0                 # 玩家ID
 var skin_index = 0                # 皮肤索引
-var body_z_index = 9999
+var body_z_index = 1000
 # 多人游戏同步变量
 @export var sync_position = Vector2.ZERO
 @export var sync_direction = Vector2.RIGHT
@@ -148,8 +148,12 @@ func grow():
 	var last_position = trail_positions.back()
 	trail_positions.push_back(last_position)
 
+# 从服务器接收到增长命令时调用
+func grow_from_server():
+	grow()
+
 # 同步移动数据到其他玩家
-@rpc("unreliable")
+@rpc("unreliable", "call_local")
 func sync_movement(pos, dir):
 	if not is_local_player:
 		global_position = pos
@@ -166,9 +170,7 @@ func _on_area_entered(area):
 	if area.is_in_group("food"):
 		# 通知服务器食物被吃
 		NetworkGameManager.notify_food_eaten.rpc_id(1, area.get_path())
-		# 通知服务器蛇增长了（服务器会广播给所有客户端）
-		NetworkGameManager.snake_grow.rpc_id(1, player_id)
-		# 蛇的长度增加
+		# 本地先增长一次，提供即时反馈
 		grow()
 	elif area.is_in_group("body"):
 		# 需要判断这个身体段是否属于自己
@@ -191,7 +193,7 @@ func food_eaten(food_path):
 			NetworkGameManager.eat_food.emit()
 
 # 玩家死亡
-@rpc("reliable", "any_peer", "call_local")
+@rpc("reliable", "call_local")
 func player_died():
 	if is_local_player:
 		# 本地玩家死亡逻辑

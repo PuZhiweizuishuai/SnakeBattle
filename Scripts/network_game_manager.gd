@@ -271,7 +271,7 @@ func spawn_network_food(food_position: Vector2):
 
 
 # 通知服务器食物被吃掉
-@rpc("reliable", "any_peer")
+@rpc("reliable", "any_peer", "call_local")
 func notify_food_eaten(food_path: NodePath):
 	if not multiplayer.is_server():
 		return
@@ -281,11 +281,16 @@ func notify_food_eaten(food_path: NodePath):
 	if food:
 		# 获取吃食物的玩家ID
 		var player_id = multiplayer.get_remote_sender_id()
+		if player_id == 0:  # 如果是服务器自己吃的
+			player_id = 1
 		var player_name = get_user_name(player_id)
 		print("玩家 ", player_name, " 吃到了食物")
 		
 		# 通知所有客户端删除这个食物
 		remove_food.rpc(food_path)
+		
+		# 通知所有客户端让对应玩家的蛇增长
+		snake_grow.rpc(player_id)
 		
 		# 生成新食物
 		var new_food_pos = Vector2(
@@ -297,14 +302,14 @@ func notify_food_eaten(food_path: NodePath):
 		spawn_network_food.rpc(new_food_pos)
 
 # 新增：通知所有客户端删除食物
-@rpc("reliable")
+@rpc("reliable", "call_local")
 func remove_food(food_path: NodePath):
 	var food = get_node_or_null(food_path)
 	if food:
 		food.queue_free()
 
 # 通知所有客户端某个玩家的蛇增长了
-@rpc("reliable")
+@rpc("reliable", "call_local")
 func snake_grow(player_id: int):
 	# 找到对应的蛇头并调用grow方法
 	var snake_head = get_tree().get_root().find_child(str(player_id), true, false)
