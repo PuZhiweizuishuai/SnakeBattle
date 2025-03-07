@@ -11,11 +11,6 @@ func _ready() -> void:
 		button.mouse_entered.connect(button.grab_focus)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 # 按下退出游戏事件
 func _on_exit_btn_pressed() -> void:
 	GameManager.play_click()

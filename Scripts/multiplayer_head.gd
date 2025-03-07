@@ -55,7 +55,7 @@ func _physics_process(delta: float) -> void:
 		# 本地玩家控制
 		handle_local_input(delta)
 		# 同步位置和方向到其他玩家
-		sync_movement.rpc(global_position, direction)
+		sync_movement.rpc(global_position, direction, current_speed)
 	
 	# 更新身体
 	update_trail(delta)
@@ -69,6 +69,7 @@ func handle_local_input(delta):
 		direction = dir.normalized()
 	
 	# 更新当前速度
+	var old_speed = current_speed
 	if Input.is_action_pressed("speed_up"):
 		current_speed = 400.0  # 加速时速度翻倍
 	else:
@@ -80,6 +81,9 @@ func handle_local_input(delta):
 	
 	# 处理屏幕边界穿越
 	handle_screen_wrap()
+	
+	# 同步移动数据到其他玩家
+	sync_movement.rpc(global_position, direction, current_speed)
 
 # 处理屏幕边界穿越
 func handle_screen_wrap():
@@ -98,7 +102,8 @@ func update_trail(delta):
 	
 	# 优化轨迹采样
 	trail_sample_distance += (direction * current_speed * delta).length()
-	if trail_sample_distance >= BASE_SEGMENT_GAP * 0.5:
+	var sample_threshold = BASE_SEGMENT_GAP * (0.5 if current_speed <= 200.0 else 0.25)
+	if trail_sample_distance >= sample_threshold:
 		trail_positions.insert(1, trail_positions[0])
 		trail_sample_distance = 0.0
 		
@@ -154,10 +159,11 @@ func grow_from_server():
 
 # 同步移动数据到其他玩家
 @rpc("unreliable", "call_local")
-func sync_movement(pos, dir):
+func sync_movement(pos, dir, speed):
 	if not is_local_player:
 		global_position = pos
 		direction = dir
+		current_speed = speed
 		rotation = direction.angle() + TAU / 4
 
 # 碰撞检测

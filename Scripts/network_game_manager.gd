@@ -50,7 +50,7 @@ func _connect_multiplayer_signals() -> void:
 	multiplayer.connected_to_server.connect(_connected)
 
 # 服务器管理
-func create_snake_server(name: String) -> void:
+func create_snake_server(username: String) -> void:
 	_reset_network_state()
 	
 	if peer.create_server(PORT) != OK:
@@ -59,7 +59,7 @@ func create_snake_server(name: String) -> void:
 					 
 	multiplayer.multiplayer_peer = peer      # 设置多人对等体
 	# 添加本地玩家
-	players.append(UserData.new(1, name))
+	players.append(UserData.new(1, username))
 	# 发送服务器创建成功信号
 	create_server_success.emit()
 	# 触发玩家列表更新信号
