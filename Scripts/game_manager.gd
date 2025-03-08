@@ -8,6 +8,10 @@ signal apple_eaten
 # 皮肤切换
 signal skin_change(index: int)
 
+var play_music = true
+var play_audio = true
+var language : String = "ZH"
+var open_joystick = true
 
 var audioBgmPlayer
 
@@ -62,17 +66,20 @@ func _ready() -> void:
 	_audioPlayer()
 
 func play_eat() -> void:
-	audioPlayer.stream = eat
-	audioPlayer.play()
+	if play_audio:
+		audioPlayer.stream = eat
+		audioPlayer.play()
 
 func play_die() -> void:
-	audioPlayer.stream = die
-	audioPlayer.play()
+	if play_audio:
+		audioPlayer.stream = die
+		audioPlayer.play()
 
 
 func play_click() -> void:
-	audioPlayer.stream = click
-	audioPlayer.play()
+	if play_audio:
+		audioPlayer.stream = click
+		audioPlayer.play()
 
 func add_source(x: int) -> void:
 	source = source + x	
@@ -106,3 +113,10 @@ func load_multiplayer_second_ui():
 
 func load_multiplayer_game():
 	get_tree().change_scene_to_file("res://Scenes/multiplayer_game.tscn")
+	
+func load_setting():
+	get_tree().change_scene_to_file("res://Scenes/setting.tscn")
+
+
+func load_about():
+	get_tree().change_scene_to_file("res://Scenes/about.tscn")

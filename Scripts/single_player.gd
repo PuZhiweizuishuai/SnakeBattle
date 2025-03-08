@@ -1,9 +1,12 @@
 extends Node2D
 
-
+@onready var joystick = $UI/VirtualJoystick
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if OS.get_name() == "Windows" || !GameManager.open_joystick:
+		joystick.visible = false
+		remove_child(joystick)
+		joystick.queue_free()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -37,13 +37,13 @@ func _on_about_pressed() -> void:
 	# 只有关于、设置界面需要条判断，因为别的按钮会被退出按钮遮挡
 	if exit_dialog.visible != true:
 		GameManager.play_click()
-		pass # Replace with function body.
+		GameManager.load_about()
 
 # 进入设置页面
 func _on_setting_pressed() -> void:
 	if exit_dialog.visible != true:
 		GameManager.play_click()
-		pass # Replace with function body.
+		GameManager.load_setting()
 	
 # 
 

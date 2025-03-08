@@ -6,7 +6,6 @@ English introduction: [Snake Battle](/README.md)
 
 一个用 GODOT 游戏引擎编写的局域网贪吃蛇对战游戏
 
-目前暂未完成，开发中
 
 ## 运行截图
 
@@ -26,7 +25,7 @@ English introduction: [Snake Battle](/README.md)
 ### 多人模式
 
 
-开发中。。。
+![多人游戏](/screenshot/04.png)
 
 
 ## 开发进度
@@ -43,7 +42,7 @@ English introduction: [Snake Battle](/README.md)
 
 ### 多人模式
 
-- [ ] 创建房间联机对战
+- [X] 创建房间联机对战
 
 ## 字体版权
 

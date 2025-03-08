@@ -174,7 +174,7 @@ func _on_start_game_btn_pressed() -> void:
 	# 初始化头部位置
 	NetworkGameManager.snake_head_initial_position()
 	# 等待位置同步完成后再添加玩家
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(0.5).timeout
 	if multiplayer.is_server():
 		NetworkGameManager.start_multiplayer_game.rpc()	
 	# 加载多人游戏场景

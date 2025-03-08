@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc1tgfy8vall6"]
+
+[ext_resource type="Script" uid="uid://fykxtrnkxlu1" path="res://Scripts/about.gd" id="1_t286r"]
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_vbrdd"]
+[ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="2_0p54k"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="4_m6yjq"]
+
+[node name="About" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t286r")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_vbrdd")
+
+[node name="BackBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 38.0
+offset_right = 264.0
+offset_bottom = 238.0
+scale = Vector2(0.2, 0.2)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_0p54k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -504.0
+offset_top = -149.0
+offset_right = 504.0
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_m6yjq")
+theme_override_font_sizes/font_size = 100
+text = "不挂高数出品
+www.buguagaoshu.com"
+
+[node name="ip" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_m6yjq")
+theme_override_font_sizes/font_size = 50
+
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]

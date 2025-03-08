@@ -3,8 +3,16 @@ extends Node2D
 @onready var players = $Players
 @onready var HEAD = preload("res://Scenes/multiplayer_head.tscn")
 @onready var FOOD = preload("res://Scenes/food.tscn")
+@onready var joystick = $CanvasLayer/VirtualJoystick
+
 
 func _ready():
+	# 移除手柄
+	if !GameManager.open_joystick:
+		joystick.visible = false
+		remove_child(joystick)
+		joystick.queue_free()
+				
 	NetworkGameManager.eat_food.connect(spawn_food)
 	# 给players节点下增加玩家
 	for player in NetworkGameManager.players:
@@ -48,3 +56,7 @@ func spawn_food(food_position: Vector2):
 # 延迟添加食物
 func _add_food(food: Node):
 	$Foods.add_child(food)
+
+
+func _on_back_btn_pressed() -> void:
+	GameManager.load_multiplayer_second_ui()

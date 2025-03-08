@@ -1,0 +1,169 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhpt8xgc5ivax"]
+
+[ext_resource type="Texture2D" uid="uid://dx2jw5wvngpau" path="res://AssetBundle/Sprites/Background/bg1920_1080.png" id="1_47wfv"]
+[ext_resource type="Script" uid="uid://dpklwnw6i7ce3" path="res://Scripts/setting.gd" id="1_cegie"]
+[ext_resource type="FontFile" uid="uid://d3417cvdroklq" path="res://AssetBundle/Fonts/ZCOOL_Kuaile.ttf" id="2_cegie"]
+[ext_resource type="Texture2D" uid="uid://chqj67wdr3ypi" path="res://AssetBundle/Sprites/UI/back.svg" id="4_4jlj6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jlj6"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[node name="Setting" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cegie")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_47wfv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -582.0
+offset_top = -277.0
+offset_right = 582.0
+offset_bottom = 277.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+text = "设置"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+text = "音乐："
+
+[node name="MusicBtn" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jlj6")
+text = "开"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+text = "音效："
+
+[node name="AudioBtn" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jlj6")
+text = "开"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+text = "语言："
+
+[node name="ChineseBtn" type="Button" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jlj6")
+text = "简体中文"
+
+[node name="EnglishBtn" type="Button" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jlj6")
+text = "English"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+text = "摇杆："
+
+[node name="JoystickBtn" type="Button" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_cegie")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4jlj6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jlj6")
+text = "开"
+
+[node name="BackBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 38.0
+offset_right = 264.0
+offset_bottom = 238.0
+scale = Vector2(0.2, 0.2)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_4jlj6")
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MusicBtn" to="." method="_on_music_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/AudioBtn" to="." method="_on_audio_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/ChineseBtn" to="." method="_on_chinese_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/EnglishBtn" to="." method="_on_english_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer4/JoystickBtn" to="." method="_on_joystick_btn_pressed"]
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]

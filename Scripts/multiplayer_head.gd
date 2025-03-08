@@ -21,7 +21,7 @@ var viewport_size = null
 var is_local_player = false       # 是否为本地玩家
 var player_id = 0                 # 玩家ID
 var skin_index = 0                # 皮肤索引
-var body_z_index = 1000
+
 # 多人游戏同步变量
 @export var sync_position = Vector2.ZERO
 @export var sync_direction = Vector2.RIGHT
@@ -98,6 +98,8 @@ func handle_screen_wrap():
 
 # 更新轨迹
 func update_trail(delta):
+	if trail_positions.is_empty():
+		return
 	trail_positions[0] = global_position
 	
 	# 优化轨迹采样
@@ -112,6 +114,8 @@ func update_trail(delta):
 
 # 更新身体段位置
 func update_body():
+	if trail_positions.is_empty():
+		return
 	var target_positions = trail_positions
 	
 	while body_segments.size() < (target_positions.size() - 1) / 2:
@@ -121,8 +125,6 @@ func update_body():
 		# 设置身体段的所有者ID
 		new_segment.set_meta("owner_id", player_id)
 		# 设置身体段的皮肤
-		new_segment.z_index = body_z_index - 1 
-		body_z_index = body_z_index - 1
 		new_segment.set_skin(skin_index)
 		var segment_index = body_segments.size()
 		var target_idx = (segment_index + 1) * 2
@@ -185,7 +187,7 @@ func _on_area_entered(area):
 		# 如果身体段不属于自己，则判定为死亡
 		if segment_owner_id != player_id:
 			print("你死了! 碰到了玩家", segment_owner_id, "的身体")
-			player_died.rpc()
+			player_died.rpc(player_id)
 
 # 通知服务器食物被吃
 @rpc("reliable", "any_peer", "call_local")
@@ -200,7 +202,31 @@ func food_eaten(food_path):
 
 # 玩家死亡
 @rpc("reliable", "call_local")
-func player_died():
+func player_died(userid: int):
 	if is_local_player:
 		# 本地玩家死亡逻辑
-		print("你死了!")
+		print(userid, "你死了!")
+		# 通知服务器处理死亡
+		if multiplayer.is_server():
+			# 服务器直接调用处理函数
+			NetworkGameManager.spawn_death_foods(global_position, body_segments.size())
+		else:
+			# 客户端通过RPC通知服务器
+			NetworkGameManager.notify_player_death.rpc_id(1, global_position, body_segments.size())
+	
+	# 清理蛇的身体（所有客户端都执行）
+	for segment in body_segments:
+		segment.queue_free()
+	body_segments.clear()
+	trail_positions.clear()
+	trail_positions = [global_position]  # 重置轨迹为当前位置，而不是完全清空
+	
+	# 隐藏蛇头
+	visible = false	
+	# 销毁节点
+	queue_free()
+	# 如果是本地玩家，返回大厅
+	if is_local_player:
+		print("页面跳转")
+		# await get_tree().create_timer(1.0).timeout
+		# GameManager.load_multiplayer_second_ui()

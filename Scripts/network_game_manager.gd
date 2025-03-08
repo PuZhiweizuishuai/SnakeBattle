@@ -8,7 +8,7 @@ const PROTO_NAME = "snake"
 # IP
 const DEFAULT_SERVER_IP = "127.0.0.1"
 
-# WebSocket多人网络对等体实例
+# WebSocket多人网络对等体实例 WebSocketMultiplayerPeer WebRTCMultiplayerPeer
 var peer := WebSocketMultiplayerPeer.new()
 
 # 存储用户列表
@@ -36,7 +36,11 @@ var _pending_player_name: String = ""
 
 func _init() -> void:
 	# 设置支持的协议列表
-	peer.supported_protocols = [PROTO_NAME]  
+	peer.supported_protocols = [PROTO_NAME]
+	# 优化 WebSocket 设置
+#	peer.handshake_headers = ["Sec-WebSocket-Protocol: " + PROTO_NAME]
+	#peer.inbound_buffer_size = 65536  # 增加缓冲区大小
+	#peer.outbound_buffer_size = 65536
 
 func _ready() -> void:
 	_connect_multiplayer_signals()
@@ -56,7 +60,6 @@ func create_snake_server(username: String) -> void:
 	if peer.create_server(PORT) != OK:
 		print("服务器创建失败！")
 		return
-					 
 	multiplayer.multiplayer_peer = peer      # 设置多人对等体
 	# 添加本地玩家
 	players.append(UserData.new(1, username))
@@ -320,3 +323,39 @@ func snake_grow(player_id: int):
 	var snake_head = get_tree().get_root().find_child(str(player_id), true, false)
 	if snake_head:
 		snake_head.call_deferred("grow_from_server")
+
+# 客户端通知服务器玩家死亡
+@rpc("reliable", "any_peer")
+func notify_player_death(death_pos: Vector2, count: int):
+	if not multiplayer.is_server():
+		return
+	# 服务器收到通知后调用生成食物的函数
+	spawn_death_foods(death_pos, count)
+
+# 在死亡位置生成食物（服务器端函数）
+func spawn_death_foods(death_pos: Vector2, count: int):
+	if not multiplayer.is_server():
+		return
+		
+	# 创建一个计时器来延迟生成食物
+	var timer = get_tree().create_timer(0.5).timeout
+	await timer
+	
+	# 在死亡位置周围随机生成食物
+	for i in range(count):
+		var offset = Vector2(
+			randf_range(-50, 50),
+			randf_range(-50, 50)
+		)
+		var food_pos = death_pos + offset
+		
+		# 确保食物在游戏区域内
+		food_pos.x = clamp(food_pos.x, 50, GameManager.SHOW_RANGE.x - 50)
+		food_pos.y = clamp(food_pos.y, 50, GameManager.SHOW_RANGE.y - 50)
+		
+		# 每隔一小段时间生成一个食物
+		if i > 0:
+			await get_tree().create_timer(0.1).timeout
+		
+		# 同步食物到所有客户端
+		spawn_network_food.rpc(food_pos)
