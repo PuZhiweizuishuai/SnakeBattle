@@ -155,18 +155,30 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_1pb4x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_gyj5s")
 text = "加入房间"
 
+[node name="NetModBtn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_1ij72")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/hover = SubResource("StyleBoxFlat_ivgbo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1pb4x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gyj5s")
+text = "网络模式：客户端"
+
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_1ij72")
-theme_override_font_sizes/font_size = 50
-text = "说明：点击创建房间，不需要输入房间
-地址，加入房间才需要填写房间地址
+theme_override_font_sizes/font_size = 40
+text = "说明：点击创建房间，不需要输入房间地址，加入
+房间才需要填写房间地址
 
 因为浏览器环境限制，暂不支持创建房间
 
-房间号暂时只显示IPv4地址，IPv6地址请
-到系统设置查看"
+房间号暂时只显示IPv4地址，IPv6地址请到系统
+设置查看
+
+与网页联机需要将网络模式切换为Web"
 
 [node name="CustomDialog" parent="." instance=ExtResource("5_jg5jl")]
 visible = false
@@ -185,6 +197,7 @@ text = "昵称不能为空！"
 [connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/CreateRoomBtn" to="." method="_on_create_room_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/JoinRoomBtn" to="." method="_on_join_room_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/NetModBtn" to="." method="_on_net_mod_btn_pressed"]
 [connection signal="pressed" from="CustomDialog/ExitDialog/ConfirmExitBtn" to="." method="_on_confirm_exit_btn_pressed"]
 [connection signal="pressed" from="CustomDialog/ExitDialog/CancelExitBtn" to="." method="_on_cancel_exit_btn_pressed"]
 

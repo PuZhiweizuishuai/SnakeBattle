@@ -9,7 +9,7 @@ const PROTO_NAME = "snake"
 const DEFAULT_SERVER_IP = "127.0.0.1"
 
 # WebSocket多人网络对等体实例 WebSocketMultiplayerPeer WebRTCMultiplayerPeer
-var peer := WebSocketMultiplayerPeer.new()
+var peer : MultiplayerPeer = null
 
 # 存储用户列表
 var players: Array = []
@@ -36,11 +36,12 @@ var _pending_player_name: String = ""
 
 func _init() -> void:
 	# 设置支持的协议列表
-	peer.supported_protocols = [PROTO_NAME]
+	#peer.supported_protocols = [PROTO_NAME]
 	# 优化 WebSocket 设置
 #	peer.handshake_headers = ["Sec-WebSocket-Protocol: " + PROTO_NAME]
 	#peer.inbound_buffer_size = 65536  # 增加缓冲区大小
 	#peer.outbound_buffer_size = 65536
+	pass
 
 func _ready() -> void:
 	_connect_multiplayer_signals()
@@ -56,6 +57,11 @@ func _connect_multiplayer_signals() -> void:
 # 服务器管理
 func create_snake_server(username: String) -> void:
 	_reset_network_state()
+	if GameManager.network_mod == 0:
+		peer = ENetMultiplayerPeer.new()
+	else:
+		peer = WebSocketMultiplayerPeer.new()
+		peer.supported_protocols = [PROTO_NAME]
 	
 	if peer.create_server(PORT) != OK:
 		print("服务器创建失败！")
@@ -74,13 +80,20 @@ func connect_pressed(host_text: String, nickname: String) -> void:
 	# 创建客户端连接（WebSocket地址格式）
 	# 保存玩家名称，供后续使用
 	_pending_player_name = nickname
-	peer.create_client("ws://" + host_text + ":" + str(PORT))
+	if GameManager.network_mod == 0:
+		peer = ENetMultiplayerPeer.new()
+		peer.create_client(host_text, PORT)
+	else:
+		peer = WebSocketMultiplayerPeer.new()
+		peer.supported_protocols = [PROTO_NAME]
+		peer.create_client("ws://" + host_text + ":" + str(PORT))
 	multiplayer.multiplayer_peer = peer
 
 # 网络状态重置
 func _reset_network_state() -> void:
 	multiplayer.multiplayer_peer = null
 	players.clear()
+	snakeInfoMap.clear()
 
 # 成功连接到服务器时的回调
 func _connected() -> void:
@@ -338,8 +351,8 @@ func spawn_death_foods(death_pos: Vector2, count: int):
 		return
 		
 	# 创建一个计时器来延迟生成食物
-	var timer = get_tree().create_timer(0.5).timeout
-	await timer
+	#var timer = get_tree().create_timer(0.5).timeout
+	#await timer
 	
 	# 在死亡位置周围随机生成食物
 	for i in range(count):

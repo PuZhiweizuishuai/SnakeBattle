@@ -12,6 +12,9 @@ var play_music = true
 var play_audio = true
 var language : String = "ZH"
 var open_joystick = true
+# 网络模式 0 ENetMultiplayerPeer 低延迟
+# 1 WebSocketMultiplayerPeer 兼容 web
+var network_mod = 0
 
 var audioBgmPlayer
 
